@@ -17,32 +17,105 @@ import com.alexpournaras.nachos.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
+    private ViewPager sliderViewPager;
+    private RecyclerView moviesRecyclerView;
+    private SliderPagerAdapter sliderPagerAdapter;
+    private MovieAdapter movieAdapter;
+    private List<Movie> sliderMovies;
+    private List<Movie> movieList;
+    private BottomNavigationView bottomNavigationView;
+    private ActionBar actionBar;
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        sliderMovies = new ArrayList<>();
+        movieList = new ArrayList<>();
 
-        setSupportActionBar(binding.toolbar);
+        createDummySliderMovies();
+        createDummyMovies();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.home);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        sliderViewPager = findViewById(R.id.viewPager);
+        sliderPagerAdapter = new SliderPagerAdapter(this, sliderMovies);
+        sliderViewPager.setAdapter(sliderPagerAdapter);
+
+        moviesRecyclerView = findViewById(R.id.moviesRecyclerView);
+        movieAdapter = new MovieAdapter(this, movieList);
+        moviesRecyclerView.setAdapter(movieAdapter);
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        // Handle the home action
+                        break;
+                    case R.id.movies:
+                        // Handle the movies action
+                        break;
+                    case R.id.favorites:
+                        // Handle the favorites action
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
             }
+
         });
+
+
+
+    }
+
+    private void createDummySliderMovies() {
+        String[] randomTitles = {"Slider Movie A", "Slider Movie B", "Slider Movie C"};
+        Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            String title = randomTitles[random.nextInt(randomTitles.length)];
+            double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
+            sliderMovies.add(new Movie(title, rating));
+        }
+    }
+
+    private void createDummyMovies() {
+        String[] randomTitles = {"Movie A", "Movie B", "Movie C", "Movie D", "Movie E", "Movie F", "Movie G", "Movie H"};
+        Random random = new Random();
+
+        for (int i = 0; i < 8; i++) {
+            String title = randomTitles[random.nextInt(randomTitles.length)];
+            double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
+            movieList.add(new Movie(title, rating));
+        }
     }
 
     @Override
@@ -67,10 +140,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }
