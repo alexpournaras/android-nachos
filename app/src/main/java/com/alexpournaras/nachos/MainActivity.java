@@ -13,7 +13,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.alexpournaras.nachos.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         String[] randomTitles = {"Movie A", "Movie B", "Movie C", "Movie D", "Movie E", "Movie F", "Movie G", "Movie H"};
         Random random = new Random();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 12; i++) {
             String title = randomTitles[random.nextInt(randomTitles.length)];
             double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
             movieList.add(new Movie(title, rating));

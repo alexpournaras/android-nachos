@@ -31,10 +31,13 @@ public class SliderPagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.slider_item, container, false);
         ImageView sliderImage = view.findViewById(R.id.sliderImage);
         TextView sliderTitle = view.findViewById(R.id.sliderTitle);
+        TextView sliderRatingText = view.findViewById(R.id.sliderRatingText);
+
 
         Movie movie = sliderMovies.get(position);
         sliderImage.setImageResource(R.drawable.slider_batman);
         sliderTitle.setText(movie.getTitle());
+        sliderRatingText.setText("75% Liked this movie!");
 
         container.addView(view);
         return view;

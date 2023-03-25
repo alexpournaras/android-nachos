@@ -10,8 +10,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <string name="home">home</string>
-    <string name="movies">movies</string>
+    <string name="home">Home</string>
+    <string name="movies">Movies</string>
     <string name="favorites">Favorites</string>
 
 </resources>

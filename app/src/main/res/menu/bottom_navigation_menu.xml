@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/slider_batman"
+        android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/home"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/movies"
-        android:icon="@drawable/slider_batman"
+        android:icon="@drawable/ic_baseline_movie_24"
         android:title="@string/movies"
         app:showAsAction="ifRoom" />
 

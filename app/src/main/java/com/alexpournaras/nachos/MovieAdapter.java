@@ -33,7 +33,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         Movie movie = movies.get(position);
 
         holder.movieTitle.setText(movie.getTitle());
-        holder.movieRating.setText("Rating: " + movie.getRating());
         holder.movieImage.setImageResource(R.drawable.escape_room); // Set the image for every movie
     }
 
@@ -45,13 +44,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView movieImage;
         TextView movieTitle;
-        TextView movieRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             movieImage = itemView.findViewById(R.id.movieImage);
             movieTitle = itemView.findViewById(R.id.movieTitle);
-            movieRating = itemView.findViewById(R.id.movieRating);
         }
     }
 }
