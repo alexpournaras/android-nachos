@@ -18,7 +18,8 @@
             android:layout_height="450dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/slider_batman" />
+            android:src="@drawable/slider_batman"
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:id="@+id/sliderTitle"
