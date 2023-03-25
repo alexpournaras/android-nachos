@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/favorites"
-        android:icon="@drawable/slider_batman"
+        android:icon="@drawable/ic_baseline_star_24"
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
 
