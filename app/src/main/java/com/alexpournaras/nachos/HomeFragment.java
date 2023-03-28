@@ -1,32 +1,20 @@
 package com.alexpournaras.nachos;
 
 import android.os.Bundle;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.ActionBar;
-
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 
 public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClickListener {
 
@@ -37,13 +25,11 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     private List<Movie> sliderMovies;
     private List<Movie> movieList;
     private BottomNavigationView bottomNavigationView;
-    private ActionBar actionBar;
     private NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
 
         sliderMovies = new ArrayList<>();
         movieList = new ArrayList<>();
@@ -51,12 +37,15 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         createDummySliderMovies();
         createDummyMovies();
 
-        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.setTitle(R.string.home);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            activity.getSupportActionBar().setTitle(R.string.home);
+        }
 
         sliderViewPager = view.findViewById(R.id.viewPager);
         sliderPagerAdapter = new SliderPagerAdapter(getActivity(), sliderMovies);
         sliderViewPager.setAdapter(sliderPagerAdapter);
+        sliderViewPager.setCurrentItem(Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2 % sliderMovies.size()));
 
         moviesRecyclerView = view.findViewById(R.id.moviesRecyclerView);
         movieAdapter = new MovieAdapter(getActivity(), movieList, this);
