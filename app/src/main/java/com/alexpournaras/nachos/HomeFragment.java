@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.navigation.NavController;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
-
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClickListener {
 
     private ViewPager sliderViewPager;
     private RecyclerView moviesRecyclerView;
@@ -58,7 +59,7 @@ public class HomeFragment extends Fragment {
         sliderViewPager.setAdapter(sliderPagerAdapter);
 
         moviesRecyclerView = view.findViewById(R.id.moviesRecyclerView);
-        movieAdapter = new MovieAdapter(getActivity(), movieList);
+        movieAdapter = new MovieAdapter(getActivity(), movieList, this);
         moviesRecyclerView.setAdapter(movieAdapter);
 
         return view;
@@ -85,4 +86,17 @@ public class HomeFragment extends Fragment {
             movieList.add(new Movie(title, rating));
         }
     }
+
+    @Override
+    public void onMovieItemClick(int position) {
+        Movie selectedMovie = movieList.get(position);
+        Toast.makeText(getActivity(), "Selected movie: " + selectedMovie.getTitle() + ", rating: " + selectedMovie.getRating(), Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("movie", selectedMovie);
+
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle);
+    }
+
 }

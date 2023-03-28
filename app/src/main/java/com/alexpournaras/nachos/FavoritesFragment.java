@@ -35,9 +35,9 @@ public class FavoritesFragment extends Fragment {
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle(R.string.favorites);
 
-        moviesRecyclerView = view.findViewById(R.id.moviesRecyclerView);
-        movieAdapter = new MovieAdapter(getActivity(), movieList);
-        moviesRecyclerView.setAdapter(movieAdapter);
+//        moviesRecyclerView = view.findViewById(R.id.moviesRecyclerView);
+//        movieAdapter = new MovieAdapter(getActivity(), movieList, this);
+//        moviesRecyclerView.setAdapter(movieAdapter);
 
         return view;
     }

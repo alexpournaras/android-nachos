@@ -15,17 +15,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private List<Movie> movies;
     private Context context;
+    private MovieItemClickListener movieItemClickListener;
 
-    public MovieAdapter(Context context, List<Movie> movies) {
+
+    public MovieAdapter(Context context, List<Movie> movies, MovieItemClickListener movieItemClickListener) {
         this.context = context;
         this.movies = movies;
+        this.movieItemClickListener = movieItemClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, movieItemClickListener);
     }
 
     @Override
@@ -41,14 +44,26 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return movies.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView movieImage;
         TextView movieTitle;
+        MovieItemClickListener movieItemClickListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, MovieItemClickListener movieItemClickListener) {
             super(itemView);
             movieImage = itemView.findViewById(R.id.movieImage);
             movieTitle = itemView.findViewById(R.id.movieTitle);
+            this.movieItemClickListener = movieItemClickListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            movieItemClickListener.onMovieItemClick(getAdapterPosition());
+        }
+    }
+
+    public interface MovieItemClickListener {
+        void onMovieItemClick(int position);
     }
 }

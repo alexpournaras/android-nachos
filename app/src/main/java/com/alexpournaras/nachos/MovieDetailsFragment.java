@@ -14,29 +14,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MovieDetailsFragment extends Fragment {
+    private static final String ARG_MOVIE = "movie";
 
-    private ActionBar actionBar;
-    private MovieAdapter movieAdapter;
-    private RecyclerView moviesRecyclerView;
+    private Movie movie;
 
+    public MovieDetailsFragment() {
+    }
 
-    private List<Movie> movieList;
+    public static MovieDetailsFragment newInstance(Movie movie) {
+        MovieDetailsFragment fragment = new MovieDetailsFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_MOVIE, movie);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            movie = (Movie) getArguments().getSerializable("movie");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_details, container, false);
-
-        if (getArguments() != null) {
-            String title = getArguments().getString("title");
-            float rating = getArguments().getFloat("rating");
-            // Retrieve more data from the bundle as needed
-
-            Toast.makeText(getContext(), "Title: " + title + ", Rating: " + rating, Toast.LENGTH_LONG).show();
-        }
-
         return view;
     }
-
-
-
 }
