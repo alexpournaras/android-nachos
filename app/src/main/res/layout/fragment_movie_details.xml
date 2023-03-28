@@ -4,4 +4,205 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/movieImage"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Movie image"
+            app:layout_constraintBottom_toTopOf="@id/moviesLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/slider_batman" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/moviesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieImage">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/infoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/titleText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="The Dark Knight"
+                        android:textColor="@color/white"
+                        android:textSize="36sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/subInfoLayout"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:numStars="5"
+                        android:rating="3.5"
+                        android:stepSize="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleText" />
+
+                    <TextView
+                        android:id="@+id/numOfVotes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:text="75% Liked this movie!"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                        app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                        app:layout_constraintTop_toTopOf="@id/ratingBar" />
+
+
+
+                    <TextView
+                        android:id="@+id/genresText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Action / Crime / Drama"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="4dp"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@id/ratingBar"
+                        app:layout_constraintRight_toLeftOf="@id/subInfoLayout"
+                        app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
+
+                    <LinearLayout
+                        android:id="@+id/subInfoLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:orientation="vertical"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/episodeImage"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/baseline_calendar_today_24" />
+
+                            <TextView
+                                android:id="@+id/episodeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:text="22 Oct 2017"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="@id/episodeImage"
+                                app:layout_constraintLeft_toRightOf="@id/episodeImage"
+                                app:layout_constraintTop_toTopOf="@id/episodeImage"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/seasonImage"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/baseline_schedule_24" />
+
+                            <TextView
+                                android:id="@+id/seasonText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:text="135 minutes"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="@id/seasonImage"
+                                app:layout_constraintLeft_toRightOf="@id/seasonImage"
+                                app:layout_constraintTop_toTopOf="@id/seasonImage"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp">
+
+                            <ImageView
+                                android:id="@+id/airDateImage"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/baseline_favorite_border_24" />
+
+                            <TextView
+                                android:id="@+id/airDateText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:text="1332 votes"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="@id/airDateImage"
+                                app:layout_constraintLeft_toRightOf="@id/airDateImage"
+                                app:layout_constraintTop_toTopOf="@id/airDateImage" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/overviewText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:alpha=".7"
+                    android:text="When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
+                    android:textColor="@color/white"/>
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
