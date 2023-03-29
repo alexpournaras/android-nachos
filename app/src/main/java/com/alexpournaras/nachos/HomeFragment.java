@@ -15,6 +15,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClickListener {
 
@@ -35,7 +40,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         movieList = new ArrayList<>();
 
         createDummySliderMovies();
-        createDummyMovies();
+        fetchPopularMovies();
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
@@ -54,6 +59,30 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         return view;
     }
 
+    private void fetchPopularMovies() {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        String apiKey = "9294941597b6fe907a02e1b94c646b17";
+        Call<MovieApiResponse> call = apiService.getPopularMovies(apiKey, "en", 1);
+        call.enqueue(new Callback<MovieApiResponse>() {
+            @Override
+            public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {
+                if (response.isSuccessful()) {
+                    movieList = response.body().getResults();
+                    movieAdapter = new MovieAdapter(getActivity(), movieList, HomeFragment.this);
+                    moviesRecyclerView.setAdapter(movieAdapter);
+                } else {
+                    Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieApiResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     private void createDummySliderMovies() {
         String[] randomTitles = {"Slider Movie A", "Slider Movie B", "Slider Movie C"};
         Random random = new Random();
@@ -61,18 +90,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         for (int i = 0; i < 3; i++) {
             String title = randomTitles[random.nextInt(randomTitles.length)];
             double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
-            sliderMovies.add(new Movie(title, rating));
-        }
-    }
-
-    private void createDummyMovies() {
-        String[] randomTitles = {"Movie A", "Movie B", "Movie C", "Movie D", "Movie E", "Movie F", "Movie G", "Movie H"};
-        Random random = new Random();
-
-        for (int i = 0; i < 12; i++) {
-            String title = randomTitles[random.nextInt(randomTitles.length)];
-            double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
-            movieList.add(new Movie(title, rating));
+            sliderMovies.add(new Movie(title, rating, ""));
         }
     }
 

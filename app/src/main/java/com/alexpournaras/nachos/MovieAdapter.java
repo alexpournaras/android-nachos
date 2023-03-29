@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import java.util.Random;
 
@@ -34,9 +37,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie movie = movies.get(position);
-
         holder.movieTitle.setText(movie.getTitle());
-        holder.movieImage.setImageResource(R.drawable.escape_room); // Set the image for every movie
+
+        String imageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterPath();
+        Glide.with(context)
+                .load(imageUrl)
+                .placeholder(R.drawable.escape_room)
+                .into(holder.movieImage);
     }
 
     @Override
