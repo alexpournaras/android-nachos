@@ -1,9 +1,10 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.services;
 
+import com.alexpournaras.nachos.models.Movie;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class MovieApiResponse {
+public class ApiResponse {
     @SerializedName("results")
     private List<Movie> results;
 

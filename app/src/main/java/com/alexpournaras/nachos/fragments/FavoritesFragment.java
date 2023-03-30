@@ -1,4 +1,4 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import com.alexpournaras.nachos.adapters.MovieAdapter;
+import com.alexpournaras.nachos.models.Movie;
+import com.alexpournaras.nachos.R;
 
 public class FavoritesFragment extends Fragment {
 

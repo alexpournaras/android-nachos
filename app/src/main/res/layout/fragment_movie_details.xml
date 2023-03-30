@@ -113,7 +113,7 @@
                                 android:layout_height="18dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/baseline_calendar_today_24" />
+                                app:srcCompat="@drawable/icon_calendar" />
 
                             <TextView
                                 android:id="@+id/episodeText"
@@ -140,7 +140,7 @@
                                 android:layout_height="18dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/baseline_schedule_24" />
+                                app:srcCompat="@drawable/icon_schedule" />
 
                             <TextView
                                 android:id="@+id/seasonText"
@@ -167,7 +167,7 @@
                                 android:layout_height="18dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/baseline_favorite_border_24" />
+                                app:srcCompat="@drawable/icon_heart" />
 
                             <TextView
                                 android:id="@+id/airDateText"

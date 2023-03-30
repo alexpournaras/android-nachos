@@ -1,4 +1,4 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,10 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexpournaras.nachos.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 import java.util.Random;
+import com.alexpournaras.nachos.models.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -30,7 +32,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
         return new ViewHolder(view, movieItemClickListener);
     }
 

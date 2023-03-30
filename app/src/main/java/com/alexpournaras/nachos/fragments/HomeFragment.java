@@ -1,4 +1,4 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.fragments;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.alexpournaras.nachos.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.alexpournaras.nachos.adapters.MovieAdapter;
+import com.alexpournaras.nachos.adapters.SliderPagerAdapter;
+import com.alexpournaras.nachos.models.Movie;
+import com.alexpournaras.nachos.services.ApiClient;
+import com.alexpournaras.nachos.services.ApiClient.ApiService;
+import com.alexpournaras.nachos.services.ApiResponse;
 
 public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClickListener {
 
@@ -62,10 +70,10 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     private void fetchPopularMovies() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         String apiKey = "9294941597b6fe907a02e1b94c646b17";
-        Call<MovieApiResponse> call = apiService.getPopularMovies(apiKey, "en", 1);
-        call.enqueue(new Callback<MovieApiResponse>() {
+        Call<ApiResponse> call = apiService.getPopularMovies(apiKey, "en", 1);
+        call.enqueue(new Callback<ApiResponse>() {
             @Override
-            public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
                     movieList = response.body().getResults();
                     movieAdapter = new MovieAdapter(getActivity(), movieList, HomeFragment.this);
@@ -76,7 +84,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
             }
 
             @Override
-            public void onFailure(Call<MovieApiResponse> call, Throwable t) {
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
         });

@@ -18,6 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:spanCount="3"
         android:layout_marginTop="8dp"
-        tools:listitem="@layout/movie_item" />
+        tools:listitem="@layout/item_movie" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

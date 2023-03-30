@@ -1,4 +1,4 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.models;
 
 import com.google.gson.annotations.SerializedName;
 

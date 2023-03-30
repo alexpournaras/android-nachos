@@ -4,19 +4,19 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/icon_home"
         android:title="@string/home"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/movies"
-        android:icon="@drawable/ic_baseline_movie_24"
+        android:icon="@drawable/icon_movies"
         android:title="@string/movies"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/favorites"
-        android:icon="@drawable/ic_baseline_star_24"
+        android:icon="@drawable/icon_star"
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
 

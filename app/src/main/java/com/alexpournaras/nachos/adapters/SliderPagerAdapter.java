@@ -1,4 +1,4 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import java.util.List;
+
+import com.alexpournaras.nachos.models.Movie;
+import com.alexpournaras.nachos.R;
 
 public class SliderPagerAdapter extends PagerAdapter {
 
@@ -28,7 +31,7 @@ public class SliderPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.slider_item, container, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_slider_movie, container, false);
         ImageView sliderImage = view.findViewById(R.id.sliderImage);
         TextView sliderTitle = view.findViewById(R.id.sliderTitle);
         TextView sliderRatingText = view.findViewById(R.id.sliderRatingText);

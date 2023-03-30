@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.alexpournaras.nachos.HomeFragment"
+        android:name="com.alexpournaras.nachos.fragments.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -17,23 +17,23 @@
 
     <fragment
         android:id="@+id/moviesFragment"
-        android:name="com.alexpournaras.nachos.MoviesFragment"
+        android:name="com.alexpournaras.nachos.fragments.MoviesFragment"
         android:label="Movies"
         tools:layout="@layout/fragment_movies" />
 
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.alexpournaras.nachos.FavoritesFragment"
+        android:name="com.alexpournaras.nachos.fragments.FavoritesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.alexpournaras.nachos.MovieDetailsFragment"
+        android:name="com.alexpournaras.nachos.fragments.MovieDetailsFragment"
         android:label="MovieDetailsFragment">
         <argument
             android:name="movie"
-            app:argType="com.alexpournaras.nachos.Movie" />
+            app:argType="com.alexpournaras.nachos.models.Movie" />
     </fragment>
 
 </navigation>

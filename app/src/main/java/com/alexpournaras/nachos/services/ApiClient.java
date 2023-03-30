@@ -1,9 +1,13 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.services;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
 
 public class ApiClient {
 
@@ -23,5 +27,12 @@ public class ApiClient {
                     .build();
         }
         return retrofit;
+    }
+
+    public interface ApiService {
+        @GET("movie/upcoming")
+        Call<ApiResponse> getPopularMovies(@Query("api_key") String apiKey,
+                                                @Query("language") String language,
+                                                @Query("page") int page);
     }
 }

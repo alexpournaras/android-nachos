@@ -1,4 +1,4 @@
-package com.alexpournaras.nachos;
+package com.alexpournaras.nachos.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import com.alexpournaras.nachos.models.Movie;
+import com.alexpournaras.nachos.R;
 
 public class MovieDetailsFragment extends Fragment {
     private static final String ARG_MOVIE = "movie";
