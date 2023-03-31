@@ -1,5 +1,8 @@
 package com.alexpournaras.nachos.adapters;
 
+import com.alexpournaras.nachos.models.Movie;
+import com.alexpournaras.nachos.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.alexpournaras.nachos.R;
 import com.bumptech.glide.Glide;
-
 import java.util.List;
 import java.util.Random;
-import com.alexpournaras.nachos.models.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private List<Movie> movies;
     private Context context;
     private MovieItemClickListener movieItemClickListener;
-
 
     public MovieAdapter(Context context, List<Movie> movies, MovieItemClickListener movieItemClickListener) {
         this.context = context;
@@ -41,11 +39,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         Movie movie = movies.get(position);
         holder.movieTitle.setText(movie.getTitle());
 
-        String imageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterPath();
+        String posterImageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterImageUrl();
         Glide.with(context)
-                .load(imageUrl)
-                .placeholder(R.drawable.escape_room)
-                .into(holder.movieImage);
+            .load(posterImageUrl)
+            .placeholder(R.drawable.escape_room)
+            .into(holder.movieImage);
     }
 
     @Override

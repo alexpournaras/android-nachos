@@ -51,7 +51,7 @@ public class MoviesFragment extends Fragment {
         for (int i = 0; i < 12; i++) {
             String title = randomTitles[random.nextInt(randomTitles.length)];
             double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
-            movieList.add(new Movie(title, rating, ""));
+            movieList.add(new Movie(title, "", "", 0, 0, "", ""));
         }
     }
 

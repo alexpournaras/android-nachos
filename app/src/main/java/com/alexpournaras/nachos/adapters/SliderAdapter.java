@@ -1,6 +1,7 @@
 package com.alexpournaras.nachos.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,12 @@ import java.util.List;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 
-public class SliderPagerAdapter extends PagerAdapter {
+public class SliderAdapter extends PagerAdapter {
 
     private Context context;
     private List<Movie> sliderMovies;
 
-    public SliderPagerAdapter(Context context, List<Movie> sliderMovies) {
+    public SliderAdapter(Context context, List<Movie> sliderMovies) {
         this.context = context;
         this.sliderMovies = sliderMovies;
     }
@@ -28,7 +29,6 @@ public class SliderPagerAdapter extends PagerAdapter {
         return Integer.MAX_VALUE;
     }
 
-    @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_slider_movie, container, false);
@@ -36,10 +36,12 @@ public class SliderPagerAdapter extends PagerAdapter {
         TextView sliderTitle = view.findViewById(R.id.sliderTitle);
         TextView sliderRatingText = view.findViewById(R.id.sliderRatingText);
 
-        Movie movie = sliderMovies.get(position % sliderMovies.size());
-        sliderImage.setImageResource(R.drawable.slider_batman);
-        sliderTitle.setText(movie.getTitle());
-        sliderRatingText.setText("75% Liked this movie!");
+        if (sliderMovies.size() > 0) {
+            Movie movie = sliderMovies.get(position % sliderMovies.size());
+            sliderImage.setImageResource(R.drawable.slider_batman);
+            sliderTitle.setText(movie.getTitle());
+            sliderRatingText.setText("75% Liked this movie!");
+        }
 
         container.addView(view);
         return view;
