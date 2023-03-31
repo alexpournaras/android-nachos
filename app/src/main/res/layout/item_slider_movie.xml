@@ -21,43 +21,52 @@
             android:src="@drawable/slider_batman"
             android:layout_marginRight="10dp"/>
 
-        <TextView
-            android:id="@+id/sliderTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:paddingLeft="8dp"
-            tools:text="The Dark knight" />
-
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
-
-        <RatingBar
-            android:id="@+id/sliderRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="3.5"
-            android:stepSize="0.5"
-            android:layout_marginEnd="4dp"
-            android:paddingLeft="8dp"
-            style="@style/Widget.AppCompat.RatingBar.Small" />
+        android:orientation="vertical"
+        android:layout_marginTop="0dp">
 
         <TextView
-            android:id="@+id/sliderRatingText"
-            android:layout_width="wrap_content"
+            android:id="@+id/sliderTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            tools:text="@string/hello_first_fragment" />
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="The Dark knight" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp">
+
+            <RatingBar
+                android:id="@+id/sliderRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="3.5"
+                android:stepSize="0.5"
+                android:layout_marginEnd="4dp"
+                android:paddingLeft="8dp"
+                style="@style/Widget.AppCompat.RatingBar.Small" />
+
+            <TextView
+                android:id="@+id/sliderRatingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                tools:text="@string/hello_first_fragment" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

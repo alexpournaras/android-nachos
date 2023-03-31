@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
+import com.bumptech.glide.Glide;
 
 public class SliderAdapter extends PagerAdapter {
 
@@ -38,7 +39,13 @@ public class SliderAdapter extends PagerAdapter {
 
         if (sliderMovies.size() > 0) {
             Movie movie = sliderMovies.get(position % sliderMovies.size());
-            sliderImage.setImageResource(R.drawable.slider_batman);
+
+            Glide.with(context)
+                .load("https://image.tmdb.org/t/p/original" + movie.getPosterImageUrl())
+                .placeholder(R.drawable.slider_batman)
+                .error(R.drawable.slider_batman)
+                .into(sliderImage);
+
             sliderTitle.setText(movie.getTitle());
             sliderRatingText.setText("75% Liked this movie!");
         }

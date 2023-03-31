@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
                 if (response.isSuccessful()) {
                     List<Movie> popularMovies = response.body().getResults();
 
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 5; i++) {
                         sliderMovies.add(popularMovies.get(i));
                     }
 
