@@ -14,6 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private boolean showFavoritesMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +52,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateToolbar(String title, boolean showBackButton) {
+    public void updateToolbar(String title, boolean showBackButton, boolean showFavoritesMenu) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(showBackButton);
             actionBar.setDisplayShowHomeEnabled(showBackButton);
         }
+
+        this.showFavoritesMenu = showFavoritesMenu;
+        invalidateOptionsMenu();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        if (showFavoritesMenu) {
+            getMenuInflater().inflate(R.menu.toolbar_with_favorites, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.toolbar_with_search, menu);
+        }
 
         return super.onCreateOptionsMenu(menu);
     }

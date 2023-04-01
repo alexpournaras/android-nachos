@@ -87,7 +87,7 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar("Movies", false);
+            mainActivity.updateToolbar("Movies", false, false);
         }
     }
 
