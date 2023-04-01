@@ -1,13 +1,13 @@
 package com.alexpournaras.nachos.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.viewpager.widget.PagerAdapter;
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class SliderAdapter extends PagerAdapter {
         ImageView sliderImage = view.findViewById(R.id.sliderImage);
         TextView sliderTitle = view.findViewById(R.id.sliderTitle);
         TextView sliderRatingText = view.findViewById(R.id.sliderRatingText);
+        AppCompatRatingBar sliderRating = view.findViewById(R.id.sliderRating);
 
         if (sliderMovies.size() > 0) {
             Movie movie = sliderMovies.get(position % sliderMovies.size());
@@ -47,7 +48,12 @@ public class SliderAdapter extends PagerAdapter {
                 .into(sliderImage);
 
             sliderTitle.setText(movie.getTitle());
-            sliderRatingText.setText("75% Liked this movie!");
+
+            double ratingPercentage = movie.getRating() / 10 * 100;
+            sliderRatingText.setText(String.valueOf((int)ratingPercentage));
+
+            float rating = (float) (movie.getRating() / 2);
+            sliderRating.setRating(rating);
         }
 
         container.addView(view);

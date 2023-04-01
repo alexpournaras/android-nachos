@@ -1,20 +1,14 @@
 package com.alexpournaras.nachos.fragments;
 
+import com.alexpournaras.nachos.MainActivity;
+import com.alexpournaras.nachos.models.Movie;
+import com.alexpournaras.nachos.R;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
-import com.alexpournaras.nachos.models.Movie;
-import com.alexpournaras.nachos.R;
 
 public class MovieDetailsFragment extends Fragment {
     private static final String ARG_MOVIE = "movie";
@@ -29,6 +23,7 @@ public class MovieDetailsFragment extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable(ARG_MOVIE, movie);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -45,4 +40,14 @@ public class MovieDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_details, container, false);
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+            mainActivity.updateToolbar(movie.getTitle(), true);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.alexpournaras.nachos.fragments;
 
 import com.alexpournaras.nachos.BuildConfig;
+import com.alexpournaras.nachos.MainActivity;
 import com.alexpournaras.nachos.R;
 import com.alexpournaras.nachos.adapters.MovieAdapter;
 import com.alexpournaras.nachos.adapters.SliderAdapter;
@@ -10,14 +11,11 @@ import com.alexpournaras.nachos.services.ApiClient.ApiService;
 import com.alexpournaras.nachos.services.ApiResponse;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +23,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,10 +47,6 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         fetchPopularMovies();
         fetchNowPlayingMovies();
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if (activity != null) {
-            activity.getSupportActionBar().setTitle(R.string.home);
-        }
 
         sliderComponent = view.findViewById(R.id.sliderComponent);
         sliderAdapter = new SliderAdapter(getActivity(), sliderMovies);
@@ -136,6 +129,15 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+            mainActivity.updateToolbar("Home", false);
+        }
     }
 
 }

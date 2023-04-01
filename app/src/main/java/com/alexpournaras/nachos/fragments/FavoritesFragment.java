@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.alexpournaras.nachos.MainActivity;
 import com.alexpournaras.nachos.adapters.MovieAdapter;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
@@ -36,6 +38,7 @@ public class FavoritesFragment extends Fragment {
 
 
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle(R.string.favorites);
 
 //        moviesRecyclerView = view.findViewById(R.id.moviesRecyclerView);
@@ -53,6 +56,15 @@ public class FavoritesFragment extends Fragment {
             String title = randomTitles[random.nextInt(randomTitles.length)];
             double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
             movieList.add(new Movie(title, "", "", 0, 0, "", ""));
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+            mainActivity.updateToolbar("Favourites", false);
         }
     }
 

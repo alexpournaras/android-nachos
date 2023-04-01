@@ -33,7 +33,6 @@
             android:ellipsize="end"
             tools:text="Movie Title" />
 
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

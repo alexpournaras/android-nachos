@@ -36,7 +36,7 @@
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:paddingLeft="8dp"
+            android:layout_marginLeft="8dp"
             android:maxLines="1"
             android:ellipsize="end"
             tools:text="The Dark knight" />
@@ -45,26 +45,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="0dp">
 
-            <RatingBar
+            <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/sliderRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:rating="3.5"
-                android:stepSize="0.5"
-                android:layout_marginEnd="4dp"
-                android:paddingLeft="8dp"
+                android:stepSize="0.01"
                 style="@style/Widget.AppCompat.RatingBar.Small" />
+
 
             <TextView
                 android:id="@+id/sliderRatingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
+                android:text="69"
                 android:textColor="@color/white"
-                tools:text="@string/hello_first_fragment" />
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:id="@+id/sliderRatingLikedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="% Liked this movie!"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
