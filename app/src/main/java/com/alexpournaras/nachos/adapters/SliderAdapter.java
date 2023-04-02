@@ -19,6 +19,7 @@ public class SliderAdapter extends PagerAdapter {
 
     private Context context;
     private List<Movie> sliderMovies;
+    private MovieItemClickListener movieItemClickListener;
 
     public SliderAdapter(Context context, List<Movie> sliderMovies) {
         this.context = context;
@@ -33,6 +34,17 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_slider_movie, container, false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (movieItemClickListener != null) {
+                    Movie movie = sliderMovies.get(position % sliderMovies.size());
+                    movieItemClickListener.onMovieItemClick(movie);
+                }
+            }
+        });
+
         ImageView sliderImage = view.findViewById(R.id.sliderImage);
         TextView sliderTitle = view.findViewById(R.id.sliderTitle);
         TextView sliderRatingText = view.findViewById(R.id.sliderRatingText);
@@ -68,5 +80,13 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
+    }
+
+    public interface MovieItemClickListener {
+        void onMovieItemClick(Movie movie);
+    }
+
+    public void setMovieItemClickListener(MovieItemClickListener movieItemClickListener) {
+        this.movieItemClickListener = movieItemClickListener;
     }
 }

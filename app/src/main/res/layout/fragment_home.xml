@@ -20,12 +20,12 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/sliderComponent"
                 android:layout_width="match_parent"
-                android:layout_height="520dp"
+                android:layout_height="495dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="0dp"
-                tools:itemCount="50"
+                tools:itemCount="5"
                 android:contentDescription="@string/hello_first_fragment"
                 tools:listitem="@layout/item_slider_movie"
                 android:clipToPadding="false"
@@ -66,12 +66,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/moviesComponent" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:layout_constraintTop_toBottomOf="@+id/appLogo"
-                tools:layout_editor_absoluteY="730dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

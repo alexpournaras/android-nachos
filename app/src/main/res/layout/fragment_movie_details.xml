@@ -36,6 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -45,150 +47,92 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/titleText"
-                        android:layout_width="0dp"
+                        android:id="@+id/movieTitle"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="The Dark Knight"
                         android:textColor="@color/white"
                         android:textSize="36sp"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/subInfoLayout"
                         app:layout_constraintTop_toTopOf="parent"/>
 
-                    <RatingBar
+                    <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/ratingBar"
-                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
                         android:numStars="5"
                         android:rating="3.5"
-                        android:stepSize="0.5"
+                        android:stepSize="0.01"
+                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/titleText" />
+                        app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                        style="@style/Widget.AppCompat.RatingBar.Small" />
 
                     <TextView
-                        android:id="@+id/numOfVotes"
+                        android:id="@+id/ratingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:text="75% Liked this movie!"
+                        android:textSize="12sp"
+                        android:text="69"
                         android:textColor="@color/white"
+                        android:layout_marginLeft="5dp"
                         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                         app:layout_constraintStart_toEndOf="@+id/ratingBar"
                         app:layout_constraintTop_toTopOf="@id/ratingBar" />
 
-
-
                     <TextView
-                        android:id="@+id/genresText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Action / Crime / Drama"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="4dp"
-                        android:textSize="14sp"
-                        app:layout_constraintLeft_toLeftOf="@id/ratingBar"
-                        app:layout_constraintRight_toLeftOf="@id/subInfoLayout"
-                        app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
-
-                    <LinearLayout
-                        android:id="@+id/subInfoLayout"
+                        android:id="@+id/ratingTextLong"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:orientation="vertical"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:textSize="12sp"
+                        android:text="% Liked this movie!    -"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/ratingText"
+                        app:layout_constraintStart_toEndOf="@+id/ratingText"
+                        app:layout_constraintTop_toTopOf="@id/ratingText" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/votesIcon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="8dp"
+                        app:tint="@color/main"
+                        app:layout_constraintBottom_toBottomOf="@+id/ratingTextLong"
+                        app:layout_constraintStart_toEndOf="@+id/ratingTextLong"
+                        app:layout_constraintTop_toTopOf="@id/ratingTextLong"
+                        app:srcCompat="@drawable/icon_heart" />
 
-                            <ImageView
-                                android:id="@+id/episodeImage"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/icon_calendar" />
+                    <TextView
+                        android:id="@+id/votesNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="69"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/votesIcon"
+                        app:layout_constraintStart_toEndOf="@+id/votesIcon"
+                        app:layout_constraintTop_toTopOf="@id/votesIcon" />
 
-                            <TextView
-                                android:id="@+id/episodeText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginStart="8dp"
-                                android:gravity="center_vertical"
-                                android:text="22 Oct 2017"
-                                android:textColor="@color/white"
-                                android:textSize="12sp"
-                                app:layout_constraintBottom_toBottomOf="@id/episodeImage"
-                                app:layout_constraintLeft_toRightOf="@id/episodeImage"
-                                app:layout_constraintTop_toTopOf="@id/episodeImage"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/votesText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="Votes"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/votesNumber"
+                        app:layout_constraintStart_toEndOf="@+id/votesNumber"
+                        app:layout_constraintTop_toTopOf="@id/votesNumber" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
 
-                            <ImageView
-                                android:id="@+id/seasonImage"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/icon_schedule" />
-
-                            <TextView
-                                android:id="@+id/seasonText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginStart="8dp"
-                                android:gravity="center_vertical"
-                                android:text="135 minutes"
-                                android:textColor="@color/white"
-                                android:textSize="12sp"
-                                app:layout_constraintBottom_toBottomOf="@id/seasonImage"
-                                app:layout_constraintLeft_toRightOf="@id/seasonImage"
-                                app:layout_constraintTop_toTopOf="@id/seasonImage"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-
-                            <ImageView
-                                android:id="@+id/airDateImage"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/icon_heart" />
-
-                            <TextView
-                                android:id="@+id/airDateText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginStart="8dp"
-                                android:gravity="center_vertical"
-                                android:text="1332 votes"
-                                android:textColor="@color/white"
-                                android:textSize="12sp"
-                                app:layout_constraintBottom_toBottomOf="@id/airDateImage"
-                                app:layout_constraintLeft_toRightOf="@id/airDateImage"
-                                app:layout_constraintTop_toTopOf="@id/airDateImage" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <TextView
-                    android:id="@+id/overviewText"
+                    android:id="@+id/movieDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"

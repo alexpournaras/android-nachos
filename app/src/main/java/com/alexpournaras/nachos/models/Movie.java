@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Movie implements Serializable {
+
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("title")
     private String title;
 
@@ -17,7 +21,7 @@ public class Movie implements Serializable {
     private double rating;
 
     @SerializedName("vote_count")
-    private double votes;
+    private int votes;
 
     @SerializedName("poster_path")
     private String posterImageUrl;
@@ -25,7 +29,8 @@ public class Movie implements Serializable {
     @SerializedName("backdrop_path")
     private String backgroundImageUrl;
 
-    public Movie(String title, String releaseDate, String description, double rating, double votes, String posterImageUrl, String backgroundImageUrl) {
+    public Movie(int id, String title, String releaseDate, String description, double rating, int votes, String posterImageUrl, String backgroundImageUrl) {
+        this.id = id;
         this.title = title;
         this.releaseDate = releaseDate;
         this.description = description;
@@ -35,6 +40,9 @@ public class Movie implements Serializable {
         this.backgroundImageUrl = backgroundImageUrl;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getTitle() {
         return title;
     }
@@ -47,7 +55,7 @@ public class Movie implements Serializable {
     public double getRating() {
         return rating;
     }
-    public double getVotes() {
+    public int getVotes() {
         return votes;
     }
     public String getPosterImageUrl() {

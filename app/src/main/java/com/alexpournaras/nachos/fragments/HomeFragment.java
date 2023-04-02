@@ -47,9 +47,15 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         fetchPopularMovies();
         fetchNowPlayingMovies();
 
-
         sliderComponent = view.findViewById(R.id.sliderComponent);
+        
         sliderAdapter = new SliderAdapter(getActivity(), sliderMovies);
+        sliderAdapter.setMovieItemClickListener(new SliderAdapter.MovieItemClickListener() {
+            @Override
+            public void onMovieItemClick(Movie movie) {
+                goToMovieDetails(movie);
+            }
+        });
 
         moviesComponent = view.findViewById(R.id.moviesComponent);
         movieAdapter = new MovieAdapter(getActivity(), nowPlayingMovies, this);
@@ -117,18 +123,12 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     private void updateSlider() {
         sliderAdapter.notifyDataSetChanged();
         sliderComponent.setAdapter(sliderAdapter);
+        sliderComponent.setCurrentItem(sliderMovies.size() * 1000);
     }
 
     @Override
     public void onMovieItemClick(int position) {
-        Movie selectedMovie = nowPlayingMovies.get(position);
-        Toast.makeText(getActivity(), "Selected movie: " + selectedMovie.getTitle() + ", rating: " + selectedMovie.getRating(), Toast.LENGTH_SHORT).show();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("movie", selectedMovie);
-
-        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-        navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle);
+        goToMovieDetails(nowPlayingMovies.get(position));
     }
 
     @Override
@@ -138,6 +138,14 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         if (mainActivity != null) {
             mainActivity.updateToolbar("Home", false, false);
         }
+    }
+
+    public void goToMovieDetails(Movie movie) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("movie", movie);
+
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle);
     }
 
 }

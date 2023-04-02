@@ -73,7 +73,6 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
     @Override
     public void onMovieItemClick(int position) {
         Movie selectedMovie = popularMovies.get(position);
-        Toast.makeText(getActivity(), "Selected movie: " + selectedMovie.getTitle() + ", rating: " + selectedMovie.getRating(), Toast.LENGTH_SHORT).show();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("movie", selectedMovie);

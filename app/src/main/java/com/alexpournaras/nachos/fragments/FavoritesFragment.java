@@ -34,7 +34,6 @@ public class FavoritesFragment extends Fragment {
 
         movieList = new ArrayList<>();
 
-        createDummyMovies();
 
 
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -48,16 +47,16 @@ public class FavoritesFragment extends Fragment {
         return view;
     }
 
-    private void createDummyMovies() {
-        String[] randomTitles = {"Movie A", "Movie B", "Movie C", "Movie D", "Movie E", "Movie F", "Movie G", "Movie H"};
-        Random random = new Random();
-
-        for (int i = 0; i < 12; i++) {
-            String title = randomTitles[random.nextInt(randomTitles.length)];
-            double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
-            movieList.add(new Movie(title, "", "", 0, 0, "", ""));
-        }
-    }
+//    private void createDummyMovies() {
+//        String[] randomTitles = {"Movie A", "Movie B", "Movie C", "Movie D", "Movie E", "Movie F", "Movie G", "Movie H"};
+//        Random random = new Random();
+//
+//        for (int i = 0; i < 12; i++) {
+//            String title = randomTitles[random.nextInt(randomTitles.length)];
+//            double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
+//            movieList.add(new Movie(title, "", "", 0, 0, "", ""));
+//        }
+//    }
 
     @Override
     public void onResume() {

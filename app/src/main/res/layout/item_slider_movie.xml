@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/sliderImage"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="430dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/slider_batman"
