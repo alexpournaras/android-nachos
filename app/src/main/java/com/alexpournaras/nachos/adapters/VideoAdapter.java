@@ -42,6 +42,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Video video = videos.get(position);
+        holder.videoTitle.setText(video.getTitle());
 
         String videoThumbnailUrl = "https://img.youtube.com/vi/" + video.getYoutubeId() + "/hqdefault.jpg";
         Glide.with(context)
@@ -67,11 +68,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView videoThumbnail;
         ImageButton videoPlayButton;
+        TextView videoTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             videoThumbnail = itemView.findViewById(R.id.videoThumbnail);
             videoPlayButton = itemView.findViewById(R.id.videoPlayButton);
+            videoTitle = itemView.findViewById(R.id.videoTitle);
         }
     }
 }

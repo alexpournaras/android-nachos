@@ -11,9 +11,13 @@ public class Video implements Serializable {
     @SerializedName("key")
     private String youtubeId;
 
-    public Video(String id, String youtubeId) {
+    @SerializedName("name")
+    private String title;
+
+    public Video(String id, String youtubeId, String title) {
         this.id = id;
         this.youtubeId = youtubeId;
+        this.title = title;
     }
 
     public String getId() {
@@ -21,6 +25,9 @@ public class Video implements Serializable {
     }
     public String getYoutubeId() {
         return youtubeId;
+    }
+    public String getTitle() {
+        return title;
     }
     
 }

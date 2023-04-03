@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     android:layout_marginEnd="14dp">
 
     <ImageView
@@ -30,5 +31,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_play" />
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="Video Title"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@id/videoThumbnail"
+        app:layout_constraintTop_toBottomOf="@id/videoThumbnail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
