@@ -6,6 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class ApiClient {
@@ -28,7 +29,7 @@ public class ApiClient {
 
     public interface ApiService {
         @GET("movie/now_playing")
-        Call<ApiResponse> getNowPlayingMovies(
+        Call<ApiMovieResponse> getNowPlayingMovies(
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page,
@@ -36,11 +37,18 @@ public class ApiClient {
         );
 
         @GET("movie/popular")
-        Call<ApiResponse> getPopularMovies(
+        Call<ApiMovieResponse> getPopularMovies(
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page,
             @Query("region") String region
+        );
+
+        @GET("movie/{movieId}/videos")
+        Call<ApiVideoResponse> getMovieVideos(
+            @Path("movieId") int movieId,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
         );
     }
 }

@@ -8,7 +8,7 @@ import com.alexpournaras.nachos.adapters.SliderAdapter;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.services.ApiClient;
 import com.alexpournaras.nachos.services.ApiClient.ApiService;
-import com.alexpournaras.nachos.services.ApiResponse;
+import com.alexpournaras.nachos.services.ApiMovieResponse;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -66,12 +66,12 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
 
     private void fetchPopularMovies() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<ApiResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR");
 
-        apiRequest.enqueue(new Callback<ApiResponse>() {
+        apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
             @Override
-            public void onResponse(Call<ApiResponse> apiRequest, Response<ApiResponse> response) {
+            public void onResponse(Call<ApiMovieResponse> apiRequest, Response<ApiMovieResponse> response) {
 
                 if (response.isSuccessful()) {
                     List<Movie> popularMovies = response.body().getResults();
@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
             }
 
             @Override
-            public void onFailure(Call<ApiResponse> apiRequest, Throwable t) {
+            public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
                 Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
@@ -97,12 +97,12 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
 
     private void fetchNowPlayingMovies() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<ApiResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", 1, "GR");
 
-        apiRequest.enqueue(new Callback<ApiResponse>() {
+        apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
             @Override
-            public void onResponse(Call<ApiResponse> apiRequest, Response<ApiResponse> response) {
+            public void onResponse(Call<ApiMovieResponse> apiRequest, Response<ApiMovieResponse> response) {
                 if (response.isSuccessful()) {
                     nowPlayingMovies = response.body().getResults();
                     movieAdapter = new MovieAdapter(getActivity(), nowPlayingMovies, HomeFragment.this);
@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
             }
 
             @Override
-            public void onFailure(Call<ApiResponse> apiRequest, Throwable t) {
+            public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
                 Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     private void updateSlider() {
         sliderAdapter.notifyDataSetChanged();
         sliderComponent.setAdapter(sliderAdapter);
-        sliderComponent.setCurrentItem(sliderMovies.size() * 1000);
+        sliderComponent.setCurrentItem(sliderMovies.size() * 10);
     }
 
     @Override

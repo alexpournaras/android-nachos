@@ -72,8 +72,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text="% Liked this movie!"
+                android:text="% Liked this movie!    -"
                 android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/votesIcon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                app:tint="@color/main"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingTextLong"
+                app:layout_constraintStart_toEndOf="@+id/ratingTextLong"
+                app:layout_constraintTop_toTopOf="@id/ratingTextLong"
+                app:srcCompat="@drawable/icon_heart" />
+
+            <TextView
+                android:id="@+id/votesNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="69"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/votesIcon"
+                app:layout_constraintStart_toEndOf="@+id/votesIcon"
+                app:layout_constraintTop_toTopOf="@id/votesIcon" />
+
+            <TextView
+                android:id="@+id/votesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Votes"
+                android:textColor="@color/white"
+                android:layout_marginLeft="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/votesNumber"
+                app:layout_constraintStart_toEndOf="@+id/votesNumber"
+                app:layout_constraintTop_toTopOf="@id/votesNumber" />
 
         </LinearLayout>
 

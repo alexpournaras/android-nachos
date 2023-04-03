@@ -66,6 +66,9 @@ public class SliderAdapter extends PagerAdapter {
 
             float rating = (float) (movie.getRating() / 2);
             sliderRating.setRating(rating);
+
+            TextView votesNumber = view.findViewById(R.id.votesNumber);
+            votesNumber.setText(String.valueOf(movie.getVotes()));
         }
 
         container.addView(view);

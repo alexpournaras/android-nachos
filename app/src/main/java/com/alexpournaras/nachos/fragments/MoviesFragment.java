@@ -6,7 +6,7 @@ import com.alexpournaras.nachos.adapters.MovieAdapter;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 import com.alexpournaras.nachos.services.ApiClient;
-import com.alexpournaras.nachos.services.ApiResponse;
+import com.alexpournaras.nachos.services.ApiMovieResponse;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,12 +47,12 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
 
     private void fetchPopularMovies() {
         ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
-        Call<ApiResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR");
 
-        apiRequest.enqueue(new Callback<ApiResponse>() {
+        apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
             @Override
-            public void onResponse(Call<ApiResponse> apiRequest, Response<ApiResponse> response) {
+            public void onResponse(Call<ApiMovieResponse> apiRequest, Response<ApiMovieResponse> response) {
                 if (response.isSuccessful()) {
                     popularMovies = response.body().getResults();
                     movieAdapter = new MovieAdapter(getActivity(), popularMovies, MoviesFragment.this);
@@ -63,7 +63,7 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
             }
 
             @Override
-            public void onFailure(Call<ApiResponse> apiRequest, Throwable t) {
+            public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
                 Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 

@@ -4,7 +4,7 @@ import com.alexpournaras.nachos.models.Movie;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class ApiResponse {
+public class ApiMovieResponse {
     @SerializedName("results")
     private List<Movie> results;
 

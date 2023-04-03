@@ -1,8 +1,13 @@
 package com.alexpournaras.nachos.fragments;
 
+import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.MainActivity;
+import com.alexpournaras.nachos.adapters.VideoAdapter;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
+import com.alexpournaras.nachos.models.Video;
+import com.alexpournaras.nachos.services.ApiClient;
+import com.alexpournaras.nachos.services.ApiVideoResponse;
 import com.bumptech.glide.Glide;
 
 import android.os.Bundle;
@@ -14,13 +19,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MovieDetailsFragment extends Fragment {
     private static final String ARG_MOVIE = "movie";
 
     private Movie movie;
+
+    private List<Video> videos;
+    private VideoAdapter videoAdapter;
+    private RecyclerView videosComponent;
 
     public MovieDetailsFragment() {
     }
@@ -45,6 +61,10 @@ public class MovieDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_details, container, false);
+
+        fetchMovieVideos();
+
+        videosComponent = view.findViewById(R.id.videosComponent);
 
         ImageView movieImage = view.findViewById(R.id.movieImage);
         String backgroundImageUrl = "https://image.tmdb.org/t/p/original" + movie.getBackgroundImageUrl();
@@ -76,6 +96,31 @@ public class MovieDetailsFragment extends Fragment {
         votesNumber.setText(String.valueOf(movie.getVotes()));
 
         return view;
+    }
+
+    private void fetchMovieVideos() {
+        ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
+        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.API_KEY, "en-US");
+
+        apiRequest.enqueue(new Callback<ApiVideoResponse>() {
+
+            @Override
+            public void onResponse(Call<ApiVideoResponse> apiRequest, Response<ApiVideoResponse> response) {
+                if (response.isSuccessful()) {
+                    videos = response.body().getResults();
+                    videoAdapter = new VideoAdapter(getActivity(), videos);
+                    videosComponent.setAdapter(videoAdapter);
+                } else {
+                    Toast.makeText(getActivity(), "Failed to fetch videos. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiVideoResponse> apiRequest, Throwable t) {
+                Toast.makeText(getActivity(), "Failed to fetch videos. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
     @Override
