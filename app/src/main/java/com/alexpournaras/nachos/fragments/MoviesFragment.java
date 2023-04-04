@@ -13,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -29,34 +32,41 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
     private List<Movie> popularMovies;
     private MovieAdapter movieAdapter;
     private RecyclerView moviesComponent;
+    private EndlessScrollListener endlessScrollListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
 
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        endlessScrollListener = new EndlessScrollListener(gridLayoutManager);
+
         popularMovies = new ArrayList<>();
 
-        fetchPopularMovies();
+        fetchPopularMovies(1);
 
         moviesComponent = view.findViewById(R.id.moviesComponent);
         movieAdapter = new MovieAdapter(getActivity(), popularMovies, this);
         moviesComponent.setAdapter(movieAdapter);
+        moviesComponent.setLayoutManager(gridLayoutManager);
+        moviesComponent.addOnScrollListener(endlessScrollListener);
 
         return view;
     }
 
-    private void fetchPopularMovies() {
+    private void fetchPopularMovies(int page) {
         ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", page, "GR");
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
             @Override
             public void onResponse(Call<ApiMovieResponse> apiRequest, Response<ApiMovieResponse> response) {
                 if (response.isSuccessful()) {
-                    popularMovies = response.body().getResults();
-                    movieAdapter = new MovieAdapter(getActivity(), popularMovies, MoviesFragment.this);
-                    moviesComponent.setAdapter(movieAdapter);
+                    List<Movie> movies = response.body().getResults();
+                    popularMovies.addAll(movies);
+                    movieAdapter.notifyDataSetChanged();
+                    endlessScrollListener.setLoading(false);
                 } else {
                     Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
@@ -87,6 +97,35 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.updateToolbar("Movies", false, false);
+        }
+    }
+
+    private class EndlessScrollListener extends RecyclerView.OnScrollListener {
+        private int currentPage = 1;
+        private boolean isLoading = false;
+        private LinearLayoutManager layoutManager;
+
+        public EndlessScrollListener(LinearLayoutManager layoutManager) {
+            this.layoutManager = layoutManager;
+        }
+
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            int visibleItemCount = layoutManager.getChildCount();
+            int totalItemCount = layoutManager.getItemCount();
+            int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+            if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
+                isLoading = true;
+                currentPage++;
+                fetchPopularMovies(currentPage);
+            }
+        }
+
+        public void setLoading(boolean loading) {
+            isLoading = loading;
         }
     }
 

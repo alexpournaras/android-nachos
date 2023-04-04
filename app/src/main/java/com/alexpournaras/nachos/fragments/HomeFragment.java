@@ -11,9 +11,12 @@ import com.alexpournaras.nachos.services.ApiClient.ApiService;
 import com.alexpournaras.nachos.services.ApiMovieResponse;
 
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
@@ -37,15 +40,20 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     private MovieAdapter movieAdapter;
     private RecyclerView moviesComponent;
 
+    private EndlessScrollListener endlessScrollListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        endlessScrollListener = new EndlessScrollListener(gridLayoutManager);
 
         sliderMovies = new ArrayList<>();
         nowPlayingMovies = new ArrayList<>();
 
         fetchPopularMovies();
-        fetchNowPlayingMovies();
+        fetchNowPlayingMovies(1);
 
         sliderComponent = view.findViewById(R.id.sliderComponent);
         
@@ -60,6 +68,8 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         moviesComponent = view.findViewById(R.id.moviesComponent);
         movieAdapter = new MovieAdapter(getActivity(), nowPlayingMovies, this);
         moviesComponent.setAdapter(movieAdapter);
+        moviesComponent.setLayoutManager(gridLayoutManager);
+        moviesComponent.addOnScrollListener(endlessScrollListener);
 
         return view;
     }
@@ -95,18 +105,19 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         });
     }
 
-    private void fetchNowPlayingMovies() {
+    private void fetchNowPlayingMovies(int page) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", page, "GR");
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
             @Override
             public void onResponse(Call<ApiMovieResponse> apiRequest, Response<ApiMovieResponse> response) {
                 if (response.isSuccessful()) {
-                    nowPlayingMovies = response.body().getResults();
-                    movieAdapter = new MovieAdapter(getActivity(), nowPlayingMovies, HomeFragment.this);
-                    moviesComponent.setAdapter(movieAdapter);
+                    List<Movie> movies = response.body().getResults();
+                    nowPlayingMovies.addAll(movies);
+                    movieAdapter.notifyDataSetChanged();
+                    endlessScrollListener.setLoading(false);
                 } else {
                     Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
@@ -146,6 +157,35 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle);
+    }
+
+    private class EndlessScrollListener extends RecyclerView.OnScrollListener {
+        private int currentPage = 1;
+        private boolean isLoading = false;
+        private LinearLayoutManager layoutManager;
+
+        public EndlessScrollListener(LinearLayoutManager layoutManager) {
+            this.layoutManager = layoutManager;
+        }
+
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            int visibleItemCount = layoutManager.getChildCount();
+            int totalItemCount = layoutManager.getItemCount();
+            int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+            if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
+                isLoading = true;
+                currentPage++;
+                fetchNowPlayingMovies(currentPage);
+            }
+        }
+
+        public void setLoading(boolean loading) {
+            isLoading = loading;
+        }
     }
 
 }
