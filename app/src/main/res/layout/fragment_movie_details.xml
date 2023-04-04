@@ -139,8 +139,6 @@
                                 app:layout_constraintStart_toEndOf="@+id/votesNumber"
                                 app:layout_constraintTop_toTopOf="@id/votesNumber" />
 
-
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -154,7 +152,7 @@
                             android:textColor="@color/white"/>
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/videoTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -171,12 +169,36 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintTop_toBottomOf="@id/textView"
+                            app:layout_constraintTop_toBottomOf="@id/videoTextView"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="16dp"
                             tools:listitem="@layout/item_video" />
+
+                        <TextView
+                            android:id="@+id/castTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:paddingLeft="4dp"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/videosComponent"
+                            android:text="Cast" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/castComponent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/castTextView"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="16dp"
+                            tools:listitem="@layout/item_cast" />
 
 
                     </LinearLayout>

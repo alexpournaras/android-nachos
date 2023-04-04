@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:layout_marginEnd="14dp">
+
+    <ImageView
+        android:id="@+id/castImage"
+        android:layout_width="85dp"
+        android:layout_height="105dp"
+        android:contentDescription="takis"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/escape_room" />
+
+    <TextView
+        android:id="@+id/castName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="2"
+        android:paddingTop="5dp"
+        android:text="Takis Gonias"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/castImage"
+        app:layout_constraintRight_toRightOf="@id/castImage"
+        app:layout_constraintTop_toBottomOf="@id/castImage"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

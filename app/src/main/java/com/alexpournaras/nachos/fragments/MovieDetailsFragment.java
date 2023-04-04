@@ -2,10 +2,13 @@ package com.alexpournaras.nachos.fragments;
 
 import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.MainActivity;
+import com.alexpournaras.nachos.adapters.CastAdapter;
 import com.alexpournaras.nachos.adapters.VideoAdapter;
+import com.alexpournaras.nachos.models.Cast;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 import com.alexpournaras.nachos.models.Video;
+import com.alexpournaras.nachos.services.ApiCastResponse;
 import com.alexpournaras.nachos.services.ApiClient;
 import com.alexpournaras.nachos.services.ApiVideoResponse;
 import com.bumptech.glide.Glide;
@@ -38,6 +41,10 @@ public class MovieDetailsFragment extends Fragment {
     private VideoAdapter videoAdapter;
     private RecyclerView videosComponent;
 
+    private List<Cast> cast;
+    private CastAdapter castAdapter;
+    private RecyclerView castComponent;
+
     public MovieDetailsFragment() {
     }
 
@@ -63,8 +70,10 @@ public class MovieDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_details, container, false);
 
         fetchMovieVideos();
+        fetchMovieCast();
 
         videosComponent = view.findViewById(R.id.videosComponent);
+        castComponent = view.findViewById(R.id.castComponent);
 
         ImageView movieImage = view.findViewById(R.id.movieImage);
         String backgroundImageUrl = "https://image.tmdb.org/t/p/original" + movie.getBackgroundImageUrl();
@@ -118,6 +127,31 @@ public class MovieDetailsFragment extends Fragment {
             @Override
             public void onFailure(Call<ApiVideoResponse> apiRequest, Throwable t) {
                 Toast.makeText(getActivity(), "Failed to fetch videos. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+
+    private void fetchMovieCast() {
+        ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
+        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.API_KEY, "en-US");
+
+        apiRequest.enqueue(new Callback<ApiCastResponse>() {
+
+            @Override
+            public void onResponse(Call<ApiCastResponse> apiRequest, Response<ApiCastResponse> response) {
+                if (response.isSuccessful()) {
+                    cast = response.body().getResults();
+                    castAdapter = new CastAdapter(getActivity(), cast);
+                    castComponent.setAdapter(castAdapter);
+                } else {
+                    Toast.makeText(getActivity(), "Failed to fetch cast. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiCastResponse> apiRequest, Throwable t) {
+                Toast.makeText(getActivity(), "Failed to fetch cast. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
         });
