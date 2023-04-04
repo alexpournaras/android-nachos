@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +44,13 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
             .load(imageUrl)
             .placeholder(R.drawable.escape_room)
             .into(holder.castImage);
+
+        holder.castImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, castMember.getCharacter(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -18,11 +18,19 @@ public class Cast implements Serializable {
     @SerializedName("profile_path")
     private String imageUrl;
 
-    public Cast(int id, String name, String role, String imageUrl) {
+    @SerializedName("popularity")
+    private float popularity;
+
+    @SerializedName("character")
+    private String character;
+
+    public Cast(int id, String name, String role, String imageUrl, float popularity, String character) {
         this.id = id;
         this.name = name;
         this.role = role;
         this.imageUrl = imageUrl;
+        this.popularity = popularity;
+        this.character = character;
     }
 
     public int getId() {
@@ -35,5 +43,6 @@ public class Cast implements Serializable {
         return role;
     }
     public String getImageUrl() { return imageUrl; }
-    
+    public float getPopularity() { return popularity; }
+    public String getCharacter() { return character; }
 }
