@@ -12,6 +12,14 @@ public class ApiMovieResponse {
         return results;
     }
 
+    public List<Movie> getFirst15Results() {
+        if (results.size() <= 15) {
+            return results;
+        } else {
+            return results.subList(0, 15);
+        }
+    }
+
     public void setResults(List<Movie> results) {
         this.results = results;
     }
