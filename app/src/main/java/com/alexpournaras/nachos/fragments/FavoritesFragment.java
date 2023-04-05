@@ -63,7 +63,7 @@ public class FavoritesFragment extends Fragment {
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar("Favourites", false, false);
+            mainActivity.updateToolbar("Favourites", false, false, false);
         }
     }
 

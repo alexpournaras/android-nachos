@@ -73,4 +73,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public interface MovieItemClickListener {
         void onMovieItemClick(int position);
     }
+
+    public void updateMovies(List<Movie> movies) {
+        this.movies = movies;
+        notifyDataSetChanged();
+    }
 }

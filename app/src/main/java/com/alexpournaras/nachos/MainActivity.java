@@ -5,9 +5,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.alexpournaras.nachos.fragments.MoviesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -15,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private boolean showFavoritesMenu;
+    private boolean showSearchMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateToolbar(String title, boolean showBackButton, boolean showFavoritesMenu) {
+    public void updateToolbar(String title, boolean showBackButton, boolean showFavoritesMenu, Boolean showSearchMenu) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.showFavoritesMenu = showFavoritesMenu;
+        this.showSearchMenu = showSearchMenu;
         invalidateOptionsMenu();
     }
 
@@ -68,8 +74,32 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (showFavoritesMenu) {
             getMenuInflater().inflate(R.menu.toolbar_with_favorites, menu);
-        } else {
+        } else if (showSearchMenu) {
             getMenuInflater().inflate(R.menu.toolbar_with_search, menu);
+
+            MenuItem searchItem = menu.findItem(R.id.search);
+            SearchView searchView = (SearchView) searchItem.getActionView();
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String query) {
+                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                    Fragment currentFragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+                    if (currentFragment instanceof MoviesFragment) {
+                        ((MoviesFragment) currentFragment).setSearchInputQuery(query);
+                    }
+
+                    return false;
+                }
+            });
+        } else {
+            getMenuInflater().inflate(R.menu.toolbar, menu);
         }
 
         return super.onCreateOptionsMenu(menu);

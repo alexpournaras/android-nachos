@@ -30,6 +30,8 @@ import retrofit2.Response;
 public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemClickListener {
 
     private List<Movie> popularMovies;
+    private List<Movie> searchedMovies;
+    private String searchInputQuery = "";
     private MovieAdapter movieAdapter;
     private RecyclerView moviesComponent;
     private EndlessScrollListener endlessScrollListener;
@@ -42,8 +44,9 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         endlessScrollListener = new EndlessScrollListener(gridLayoutManager);
 
         popularMovies = new ArrayList<>();
+        searchedMovies = new ArrayList<>();
 
-        fetchPopularMovies(1);
+        fetchPopularMovies();
 
         moviesComponent = view.findViewById(R.id.moviesComponent);
         movieAdapter = new MovieAdapter(getActivity(), popularMovies, this);
@@ -54,7 +57,9 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         return view;
     }
 
-    private void fetchPopularMovies(int page) {
+    private void fetchPopularMovies() {
+        int page = popularMovies.size() / 20 + 1;
+
         ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
         Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", page, "GR");
 
@@ -80,9 +85,50 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         });
     }
 
+    private void fetchSearchedMovies() {
+        ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
+        Call<ApiMovieResponse> apiRequest = apiService.searchMovies(BuildConfig.API_KEY, "en", searchInputQuery, 1);
+
+        apiRequest.enqueue(new Callback<ApiMovieResponse>() {
+
+            @Override
+            public void onResponse(Call<ApiMovieResponse> apiRequest, Response<ApiMovieResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Movie> movies = response.body().getFirst15Results();
+
+                    for (Movie movie : movies) {
+                        if (!searchedMovies.contains(movie)) {
+                            searchedMovies.add(movie);
+                        }
+                    }
+
+                    movieAdapter.updateMovies(searchedMovies);
+
+                    if (searchedMovies.size() > 0) {
+                        moviesComponent.smoothScrollToPosition(0);
+                    }
+
+                } else {
+                    Toast.makeText(getActivity(), "Failed to search movies. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
+                Toast.makeText(getActivity(), "Failed to search movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     public void onMovieItemClick(int position) {
-        Movie selectedMovie = popularMovies.get(position);
+        Movie selectedMovie;
+
+        if (searchInputQuery.length() >= 2) {
+            selectedMovie = searchedMovies.get(position);
+        } else {
+            selectedMovie = popularMovies.get(position);
+        }
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("movie", selectedMovie);
@@ -96,12 +142,23 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar("Movies", false, false);
+            mainActivity.updateToolbar("Movies", false, false, true);
+        }
+    }
+
+    public void setSearchInputQuery(String query) {
+        searchInputQuery = query;
+
+        if (query.length() >= 2) {
+            searchedMovies.clear();
+            fetchSearchedMovies();
+        } else {
+            movieAdapter.updateMovies(popularMovies);
+            moviesComponent.smoothScrollToPosition(0);
         }
     }
 
     private class EndlessScrollListener extends RecyclerView.OnScrollListener {
-        private int currentPage = 1;
         private boolean isLoading = false;
         private LinearLayoutManager layoutManager;
 
@@ -119,8 +176,10 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
 
             if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
                 isLoading = true;
-                currentPage++;
-                fetchPopularMovies(currentPage);
+
+                if (searchInputQuery.length() < 2) {
+                    fetchPopularMovies();
+                }
             }
         }
 

@@ -162,7 +162,7 @@ public class MovieDetailsFragment extends Fragment {
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar(movie.getTitle(), true, true);
+            mainActivity.updateToolbar(movie.getTitle(), true, true, false);
         }
     }
 

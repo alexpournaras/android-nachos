@@ -14,7 +14,6 @@ public class ApiCastResponse {
     public List<Cast> getResults() {
         return results.stream()
             .filter(cast -> cast.getRole().equals("Acting"))
-            .sorted(Comparator.comparing(Cast::getPopularity).reversed())
             .collect(Collectors.toList());
     }
 

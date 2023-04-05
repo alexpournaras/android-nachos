@@ -53,9 +53,17 @@ public class ApiClient {
 
         @GET("movie/{movieId}/credits")
         Call<ApiCastResponse> getMovieCast(
-                @Path("movieId") int movieId,
-                @Query("api_key") String apiKey,
-                @Query("language") String language
+            @Path("movieId") int movieId,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+        );
+
+        @GET("search/movie")
+        Call<ApiMovieResponse> searchMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("query") String query,
+            @Query("page") int page
         );
     }
 }

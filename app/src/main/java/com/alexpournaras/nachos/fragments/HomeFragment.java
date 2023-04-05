@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar("Home", false, false);
+            mainActivity.updateToolbar("Home", false, false, false);
         }
     }
 
