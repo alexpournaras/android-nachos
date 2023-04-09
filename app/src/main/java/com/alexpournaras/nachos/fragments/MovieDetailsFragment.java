@@ -118,8 +118,8 @@ public class MovieDetailsFragment extends Fragment {
     }
 
     private void fetchMovieVideos() {
-        ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
-        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.API_KEY, "en-US");
+        ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
+        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.API_KEY, "en-US", "max-age=300");
 
         apiRequest.enqueue(new Callback<ApiVideoResponse>() {
 
@@ -143,8 +143,8 @@ public class MovieDetailsFragment extends Fragment {
     }
 
     private void fetchMovieCast() {
-        ApiClient.ApiService apiService = ApiClient.getClient().create(ApiClient.ApiService.class);
-        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.API_KEY, "en-US");
+        ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
+        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.API_KEY, "en-US", "max-age=300");
 
         apiRequest.enqueue(new Callback<ApiCastResponse>() {
 

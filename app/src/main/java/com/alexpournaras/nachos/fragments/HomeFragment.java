@@ -65,8 +65,8 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     }
 
     private void fetchPopularMovies() {
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR", "max-age=300");
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -96,8 +96,8 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     }
 
     private void fetchNowPlayingMovies() {
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", 1, "GR");
+        ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
+        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", 1, "GR", "max-age=300");
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 

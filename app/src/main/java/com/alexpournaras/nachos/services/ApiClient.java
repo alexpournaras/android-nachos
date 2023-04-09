@@ -1,11 +1,15 @@
 package com.alexpournaras.nachos.services;
 
+import android.content.Context;
+
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -14,13 +18,16 @@ public class ApiClient {
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient() {
+    public static Retrofit getClient(Context context) {
         if (retrofit == null) {
+            int cacheSize = 20 * 1024 * 1024; // 20 MB
+            Cache cache = new Cache(context.getCacheDir(), cacheSize);
+    
             // Initialize retrofit to make the http calls for first time
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(logging).build();
-
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(logging).cache(cache).build();
+    
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).client(client).build();
         }
 
@@ -33,7 +40,8 @@ public class ApiClient {
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page,
-            @Query("region") String region
+            @Query("region") String region,
+            @Header("Cache-Control") String cache
         );
 
         @GET("movie/popular")
@@ -41,21 +49,24 @@ public class ApiClient {
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page,
-            @Query("region") String region
+            @Query("region") String region,
+            @Header("Cache-Control") String cache
         );
 
         @GET("movie/{movieId}/videos")
         Call<ApiVideoResponse> getMovieVideos(
             @Path("movieId") int movieId,
             @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("language") String language,
+            @Header("Cache-Control") String cache
         );
 
         @GET("movie/{movieId}/credits")
         Call<ApiCastResponse> getMovieCast(
             @Path("movieId") int movieId,
             @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("language") String language,
+            @Header("Cache-Control") String cache
         );
 
         @GET("search/movie")
@@ -63,7 +74,8 @@ public class ApiClient {
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("query") String query,
-            @Query("page") int page
+            @Query("page") int page,
+            @Header("Cache-Control") String cache
         );
     }
 }
