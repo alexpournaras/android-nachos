@@ -20,4 +20,9 @@
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/movieDetails"
+        android:enabled="false"
+        android:visible="false" />
+
 </menu>
