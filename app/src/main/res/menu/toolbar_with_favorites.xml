@@ -4,7 +4,8 @@
 
     <item
         android:id="@+id/favorites"
-        android:icon="@drawable/icon_star"
+        android:iconTint="@color/white"
+        android:icon="@drawable/icon_star_outline"
         android:title="Favorites"
         app:showAsAction="always" />
 </menu>

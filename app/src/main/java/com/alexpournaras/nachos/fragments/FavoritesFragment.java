@@ -4,59 +4,52 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 import com.alexpournaras.nachos.MainActivity;
 import com.alexpournaras.nachos.adapters.MovieAdapter;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 
-public class FavoritesFragment extends Fragment {
+public class FavoritesFragment extends Fragment implements MovieAdapter.MovieItemClickListener {
 
-    private ActionBar actionBar;
+    private List<Movie> favoriteMovies;
     private MovieAdapter movieAdapter;
-    private RecyclerView moviesRecyclerView;
-
-
-    private List<Movie> movieList;
+    private RecyclerView moviesComponent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
-        movieList = new ArrayList<>();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
 
+            favoriteMovies = mainActivity.getAllMovies().stream()
+                    .map(movieEntity -> new Movie(
+                            movieEntity.getId(),
+                            movieEntity.getTitle(),
+                            movieEntity.getReleaseDate(),
+                            movieEntity.getDescription(),
+                            movieEntity.getRating(),
+                            movieEntity.getVotes(),
+                            movieEntity.getPosterImageUrl(),
+                            movieEntity.getBackgroundImageUrl()
+                    ))
+                    .collect(Collectors.toList());
 
+            moviesComponent = view.findViewById(R.id.moviesComponent);
+            movieAdapter = new MovieAdapter(getActivity(), favoriteMovies, this);
+            moviesComponent.setAdapter(movieAdapter);
 
-        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(R.string.favorites);
-
-//        moviesRecyclerView = view.findViewById(R.id.moviesRecyclerView);
-//        movieAdapter = new MovieAdapter(getActivity(), movieList, this);
-//        moviesRecyclerView.setAdapter(movieAdapter);
+        }
 
         return view;
     }
-
-//    private void createDummyMovies() {
-//        String[] randomTitles = {"Movie A", "Movie B", "Movie C", "Movie D", "Movie E", "Movie F", "Movie G", "Movie H"};
-//        Random random = new Random();
-//
-//        for (int i = 0; i < 12; i++) {
-//            String title = randomTitles[random.nextInt(randomTitles.length)];
-//            double rating = 1 + random.nextDouble() * 4; // Random rating between 1 and 5
-//            movieList.add(new Movie(title, "", "", 0, 0, "", ""));
-//        }
-//    }
 
     @Override
     public void onResume() {
@@ -65,6 +58,17 @@ public class FavoritesFragment extends Fragment {
         if (mainActivity != null) {
             mainActivity.updateToolbar("Favourites", false, false, false);
         }
+    }
+
+    @Override
+    public void onMovieItemClick(int position) {
+        Movie selectedMovie = favoriteMovies.get(position);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("movie", selectedMovie);
+
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.action_favoritesFragment_to_movieDetailsFragment, bundle);
     }
 
 }

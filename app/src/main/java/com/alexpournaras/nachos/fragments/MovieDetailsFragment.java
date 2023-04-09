@@ -4,6 +4,7 @@ import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.MainActivity;
 import com.alexpournaras.nachos.adapters.CastAdapter;
 import com.alexpournaras.nachos.adapters.VideoAdapter;
+import com.alexpournaras.nachos.database.MovieEntity;
 import com.alexpournaras.nachos.models.Cast;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
@@ -36,6 +37,7 @@ public class MovieDetailsFragment extends Fragment {
     private static final String ARG_MOVIE = "movie";
 
     private Movie movie;
+    private Boolean isMovieFavorite = false;
 
     private List<Video> videos;
     private VideoAdapter videoAdapter;
@@ -62,6 +64,14 @@ public class MovieDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             movie = (Movie) getArguments().getSerializable("movie");
+
+            MainActivity mainActivity = (MainActivity) getActivity();
+            if (mainActivity != null) {
+                MovieEntity movieEntity = mainActivity.getMovieById(movie.getId());
+                if (movieEntity != null) {
+                    isMovieFavorite = true;
+                }
+            }
         }
     }
 
@@ -163,7 +173,32 @@ public class MovieDetailsFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.updateToolbar(movie.getTitle(), true, true, false);
+
+            if (isMovieFavorite) {
+                mainActivity.setFavoriteMovie(true);
+            } else {
+                mainActivity.setFavoriteMovie(false);
+            }
         }
     }
+
+    public void toggleFavoriteMovie() {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+
+            if (isMovieFavorite) {
+                mainActivity.deleteMovie(movie.getId());
+                mainActivity.setFavoriteMovie(false);
+                Toast.makeText(getContext(), movie.getTitle() + " removed from favorites!", Toast.LENGTH_SHORT).show();
+            } else {
+                mainActivity.insertMovie(movie);
+                mainActivity.setFavoriteMovie(true);
+                Toast.makeText(getContext(), movie.getTitle() + " added to favorites!", Toast.LENGTH_SHORT).show();
+            }
+
+            isMovieFavorite = !isMovieFavorite;
+        }
+    }
+
 
 }
