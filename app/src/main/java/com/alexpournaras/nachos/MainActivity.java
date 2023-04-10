@@ -22,6 +22,8 @@ import androidx.room.Room;
 
 import com.alexpournaras.nachos.database.MovieDatabase;
 import com.alexpournaras.nachos.database.MovieEntity;
+import com.alexpournaras.nachos.fragments.FavoritesFragment;
+import com.alexpournaras.nachos.fragments.HomeFragment;
 import com.alexpournaras.nachos.fragments.MovieDetailsFragment;
 import com.alexpournaras.nachos.fragments.MoviesFragment;
 import com.alexpournaras.nachos.models.Movie;
@@ -60,14 +62,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                Fragment currentFragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
                 switch (item.getItemId()) {
                     case R.id.home:
+                        if (currentFragment instanceof HomeFragment) return false;
                         navController.navigate(R.id.homeFragment);
                         break;
                     case R.id.movies:
+                        if (currentFragment instanceof MoviesFragment) return false;
                         navController.navigate(R.id.moviesFragment);
                         break;
                     case R.id.favorites:
+                        if (currentFragment instanceof FavoritesFragment) return false;
                         navController.navigate(R.id.favoritesFragment);
                         break;
                     default:
