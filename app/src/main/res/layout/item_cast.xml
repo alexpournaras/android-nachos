@@ -15,7 +15,7 @@
         android:contentDescription="takis"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/escape_room" />
+        android:src="@drawable/placeholder_vertical"/>
 
     <TextView
         android:id="@+id/castName"

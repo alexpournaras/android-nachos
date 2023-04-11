@@ -13,7 +13,7 @@
         android:layout_width="162dp"
         android:layout_height="108dp"
         android:contentDescription="Takis gonias"
-        android:src="@drawable/slider_batman"
+        android:src="@drawable/placeholder_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

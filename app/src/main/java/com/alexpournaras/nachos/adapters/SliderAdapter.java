@@ -55,8 +55,8 @@ public class SliderAdapter extends PagerAdapter {
 
             Glide.with(context)
                 .load("https://image.tmdb.org/t/p/original" + movie.getPosterImageUrl())
-                .placeholder(R.drawable.slider_batman)
-                .error(R.drawable.slider_batman)
+                .placeholder(R.drawable.placeholder_horizontal)
+                .error(R.drawable.placeholder_horizontal)
                 .into(sliderImage);
 
             sliderTitle.setText(movie.getTitle());

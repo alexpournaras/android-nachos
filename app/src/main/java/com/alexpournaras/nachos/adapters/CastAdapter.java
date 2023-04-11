@@ -42,7 +42,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
         String imageUrl = "https://image.tmdb.org/t/p/w500/" + castMember.getImageUrl();
         Glide.with(context)
             .load(imageUrl)
-            .placeholder(R.drawable.escape_room)
+            .placeholder(R.drawable.placeholder_vertical)
             .into(holder.castImage);
 
         holder.castImage.setOnClickListener(new View.OnClickListener() {

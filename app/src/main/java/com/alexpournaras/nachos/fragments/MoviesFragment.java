@@ -8,10 +8,13 @@ import com.alexpournaras.nachos.R;
 import com.alexpournaras.nachos.services.ApiClient;
 import com.alexpournaras.nachos.services.ApiMovieResponse;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -105,9 +108,16 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
                     }
 
                     movieAdapter.updateMovies(searchedMovies);
+                    TextView noResultsFound = getView().findViewById(R.id.noResultsFound);
+                    ImageView watchingMovieImage = getView().findViewById(R.id.watchingMovieImage);
 
                     if (searchedMovies.size() > 0) {
                         moviesComponent.smoothScrollToPosition(0);
+                        noResultsFound.setVisibility(View.INVISIBLE);
+                        watchingMovieImage.setVisibility(View.INVISIBLE);
+                    } else {
+                        noResultsFound.setVisibility(View.VISIBLE);
+                        watchingMovieImage.setVisibility(View.VISIBLE);
                     }
 
                 } else {

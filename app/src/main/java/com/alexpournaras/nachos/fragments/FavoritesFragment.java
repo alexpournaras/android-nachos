@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -46,6 +49,17 @@ public class FavoritesFragment extends Fragment implements MovieAdapter.MovieIte
             movieAdapter = new MovieAdapter(getActivity(), favoriteMovies, this);
             moviesComponent.setAdapter(movieAdapter);
 
+        }
+
+        if (favoriteMovies.size() == 0) {
+            TextView noFavoriteMovies = view.findViewById(R.id.noFavoriteMovies);
+            noFavoriteMovies.setVisibility(View.VISIBLE);
+
+            TextView addFavoriteMovies = view.findViewById(R.id.addFavoriteMovies);
+            addFavoriteMovies.setVisibility(View.VISIBLE);
+
+            ImageView watchingTogetherImage = view.findViewById(R.id.watchingTogetherImage);
+            watchingTogetherImage.setVisibility(View.VISIBLE);
         }
 
         return view;

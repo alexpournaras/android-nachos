@@ -33,7 +33,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/slider_batman" />
+                    android:src="@drawable/placeholder_horizontal" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/moviesLayout"

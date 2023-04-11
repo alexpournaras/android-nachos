@@ -18,7 +18,7 @@
             android:layout_height="430dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/slider_batman"
+            android:src="@drawable/placeholder_horizontal"
             android:layout_marginRight="10dp"/>
 
     </FrameLayout>

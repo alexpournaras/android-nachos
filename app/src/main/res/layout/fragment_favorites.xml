@@ -6,6 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/noFavoriteMovies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        android:text="You haven't add any movie as favourite yet!" />
+
+    <TextView
+        android:id="@+id/addFavoriteMovies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
+        android:text="Press the ⭐ button to add a movie here." />
+
+    <ImageView
+        android:id="@+id/watchingTogetherImage"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:src="@drawable/watching_together" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesComponent"
         android:layout_width="match_parent"

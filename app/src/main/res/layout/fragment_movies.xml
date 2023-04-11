@@ -6,6 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/noResultsFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:visibility="invisible"
+        android:text="We didn't find any movies that match your search query. 😕" />
+
+    <ImageView
+        android:id="@+id/watchingMovieImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:visibility="invisible"
+        android:src="@drawable/watching_movie" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesComponent"
         android:layout_width="match_parent"

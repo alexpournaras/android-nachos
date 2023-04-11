@@ -42,7 +42,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         String posterImageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterImageUrl();
         Glide.with(context)
             .load(posterImageUrl)
-            .placeholder(R.drawable.escape_room)
+            .placeholder(R.drawable.placeholder_vertical)
             .into(holder.movieImage);
     }
 

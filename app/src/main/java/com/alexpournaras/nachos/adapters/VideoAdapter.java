@@ -47,7 +47,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         String videoThumbnailUrl = "https://img.youtube.com/vi/" + video.getYoutubeId() + "/hqdefault.jpg";
         Glide.with(context)
             .load(videoThumbnailUrl)
-            .placeholder(R.drawable.slider_batman)
+            .placeholder(R.drawable.placeholder_horizontal)
             .into(holder.videoThumbnail);
 
         holder.videoPlayButton.setOnClickListener(new View.OnClickListener() {
