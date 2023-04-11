@@ -54,6 +54,8 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         moviesComponent.setLayoutManager(gridLayoutManager);
         moviesComponent.addOnScrollListener(endlessScrollListener);
 
+        searchInputQuery = "";
+
         return view;
     }
 

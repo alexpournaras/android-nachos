@@ -187,6 +187,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+
+        if (navController.getPreviousBackStackEntry() != null) {
+            navController.popBackStack();
+
+            if (navController.getCurrentDestination().getId() == R.id.homeFragment) {
+                bottomNavigationView.setSelectedItemId(R.id.home);
+            } else if (navController.getCurrentDestination().getId() == R.id.moviesFragment) {
+                bottomNavigationView.setSelectedItemId(R.id.movies);
+            } else if (navController.getCurrentDestination().getId() == R.id.favoritesFragment) {
+                bottomNavigationView.setSelectedItemId(R.id.favorites);
+            }
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     public void insertMovie(Movie movie) {
         MovieEntity movieEntity = new MovieEntity();
         movieEntity.setId(movie.getId());
