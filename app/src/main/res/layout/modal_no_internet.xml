@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:orientation="vertical"
+    android:background="@color/gray"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/noInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="Oops! It looks like you're not connected to the internet 😕" />
+
+    <ImageView
+        android:id="@+id/no_internet_image"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:src="@drawable/no_internet" />
+
+    <TextView
+        android:id="@+id/tryAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="Please check your network connection and try again." />
+
+    <Button
+        android:id="@+id/reload_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main"
+        android:text="Reload" />
+</LinearLayout>

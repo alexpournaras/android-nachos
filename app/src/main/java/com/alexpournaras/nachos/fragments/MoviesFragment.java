@@ -78,13 +78,13 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
                     movieAdapter.notifyDataSetChanged();
                     endlessScrollListener.setLoading(false);
                 } else {
-                    Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -121,13 +121,13 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), "Failed to search movies. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), "Failed to search movies. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to search movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Failed to search movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -155,6 +155,7 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.updateToolbar("Movies", false, false, true);
+            mainActivity.checkInternetConnection();
         }
     }
 

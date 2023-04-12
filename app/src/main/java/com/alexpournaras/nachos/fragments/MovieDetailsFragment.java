@@ -130,13 +130,13 @@ public class MovieDetailsFragment extends Fragment {
                     videoAdapter = new VideoAdapter(getActivity(), videos);
                     videosComponent.setAdapter(videoAdapter);
                 } else {
-                    Toast.makeText(getActivity(), "Failed to fetch videos. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), "Failed to fetch videos. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiVideoResponse> apiRequest, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to fetch videos. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Failed to fetch videos. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -155,13 +155,13 @@ public class MovieDetailsFragment extends Fragment {
                     castAdapter = new CastAdapter(getActivity(), cast);
                     castComponent.setAdapter(castAdapter);
                 } else {
-                    Toast.makeText(getActivity(), "Failed to fetch cast. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), "Failed to fetch cast. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiCastResponse> apiRequest, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to fetch cast. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Failed to fetch cast. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -179,6 +179,8 @@ public class MovieDetailsFragment extends Fragment {
             } else {
                 mainActivity.setFavoriteMovie(false);
             }
+
+            mainActivity.checkInternetConnection();
         }
     }
 

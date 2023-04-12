@@ -1,14 +1,23 @@
 package com.alexpournaras.nachos;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -151,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextChange(String query) {
+                    checkInternetConnection();
+
                     NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
                     Fragment currentFragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
@@ -231,6 +242,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void deleteMovie(int id) {
         movieDatabase.movieDao().delete(id);
+    }
+
+    public void checkInternetConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.modal_no_internet, null);
+            builder.setView(view);
+
+            AlertDialog dialog = builder.create();
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+
+            Button refreshButton = view.findViewById(R.id.reload_button);
+            refreshButton.setOnClickListener(v -> {
+                dialog.dismiss();
+                finish();
+                startActivity(getIntent());
+            });
+
+            dialog.show();
+        }
     }
 
 }

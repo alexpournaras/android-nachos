@@ -83,13 +83,13 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
                     updateSlider();
 
                 } else {
-                    Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -108,13 +108,13 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
                     movieAdapter = new MovieAdapter(getActivity(), nowPlayingMovies, HomeFragment.this);
                     moviesComponent.setAdapter(movieAdapter);
                 } else {
-                    Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getActivity(), "Failed to fetch movies. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiMovieResponse> apiRequest, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Failed to fetch movies. Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -137,6 +137,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.updateToolbar("Home", false, false, false);
+            mainActivity.checkInternetConnection();
         }
     }
 

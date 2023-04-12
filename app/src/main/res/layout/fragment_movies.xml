@@ -16,15 +16,14 @@
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:visibility="invisible"
+        android:elevation="1dp"
         android:text="We didn't find any movies that match your search query. 😕" />
 
     <ImageView
         android:id="@+id/watchingMovieImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="100dp"
         android:visibility="invisible"
         android:src="@drawable/watching_movie" />
 

@@ -71,6 +71,7 @@ public class FavoritesFragment extends Fragment implements MovieAdapter.MovieIte
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.updateToolbar("Favourites", false, false, false);
+            mainActivity.checkInternetConnection();
         }
     }
 
