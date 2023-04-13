@@ -12,7 +12,7 @@
     <string name="movie_background_image" translatable="false">Movie Background Image</string>
     <string name="movie_title" translatable="false">The Dark Knight</string>
     <string name="movie_rating" translatable="false">69</string>
-    <string name="movie_liked_percentage" translatable="false">% Liked this movie!</string>
+    <string name="movie_liked_percentage">% Liked this movie!</string>
     <string name="heart_icon" translatable="false">Heart Icon</string>
     <string name="movie_votes">Votes</string>
     <string name="movie_description" translatable="false">When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.</string>

@@ -7,6 +7,7 @@
     <string name="no_favorite_movies">Δεν έχεις προσθέσει κάποια αγαπημένη ταινία ακόμα!</string>
     <string name="add_favorite_movies">Πάτα το ⭐ κουμπί για να προσθέσεις μια ταινία εδώ.</string>
     <string name="in_theaters">Παίζονται τώρα</string>
+    <string name="movie_liked_percentage">% άρεσε αυτή η ταινία</string>
     <string name="movie_votes">Βαθμολογίες</string>
     <string name="videos">Βίντεο</string>
     <string name="cast">Ηθοποιοί</string>
