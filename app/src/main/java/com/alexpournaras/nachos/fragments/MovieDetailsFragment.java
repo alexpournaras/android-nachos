@@ -86,7 +86,7 @@ public class MovieDetailsFragment extends Fragment {
         castComponent = view.findViewById(R.id.castComponent);
 
         ImageView movieImage = view.findViewById(R.id.movieImage);
-        String backgroundImageUrl = "https://image.tmdb.org/t/p/original" + movie.getBackgroundImageUrl();
+        String backgroundImageUrl = BuildConfig.TMDB_OIMAGE_URL + movie.getBackgroundImageUrl();
         Glide.with(this)
             .load(backgroundImageUrl)
             .into(movieImage);
@@ -119,7 +119,7 @@ public class MovieDetailsFragment extends Fragment {
 
     private void fetchMovieVideos() {
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.API_KEY, "en-US", "max-age=300");
+        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiVideoResponse>() {
 
@@ -129,6 +129,17 @@ public class MovieDetailsFragment extends Fragment {
                     videos = response.body().getResults();
                     videoAdapter = new VideoAdapter(getActivity(), videos);
                     videosComponent.setAdapter(videoAdapter);
+
+                    TextView videoTextView = getView().findViewById(R.id.videoTextView);
+                    RecyclerView videosComponent = getView().findViewById(R.id.videosComponent);
+
+                    if (videos.size() == 0) {
+                        videoTextView.setVisibility(View.INVISIBLE);
+                        videosComponent.setVisibility(View.INVISIBLE);
+                    } else {
+                        videoTextView.setVisibility(View.VISIBLE);
+                        videosComponent.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     // Toast.makeText(getActivity(), "Failed to fetch videos. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
@@ -144,7 +155,7 @@ public class MovieDetailsFragment extends Fragment {
 
     private void fetchMovieCast() {
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.API_KEY, "en-US", "max-age=300");
+        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiCastResponse>() {
 
@@ -191,11 +202,11 @@ public class MovieDetailsFragment extends Fragment {
             if (isMovieFavorite) {
                 mainActivity.deleteMovie(movie.getId());
                 mainActivity.setFavoriteMovie(false);
-                Toast.makeText(getContext(), movie.getTitle() + " removed from favorites!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), movie.getTitle() + " " + getString(R.string.removed_from_favorites), Toast.LENGTH_SHORT).show();
             } else {
                 mainActivity.insertMovie(movie);
                 mainActivity.setFavoriteMovie(true);
-                Toast.makeText(getContext(), movie.getTitle() + " added to favorites!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), movie.getTitle() + " " + getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show();
             }
 
             isMovieFavorite = !isMovieFavorite;

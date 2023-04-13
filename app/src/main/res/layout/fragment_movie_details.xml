@@ -28,7 +28,7 @@
                     android:layout_width="0dp"
                     android:layout_height="300dp"
                     android:scaleType="centerCrop"
-                    android:contentDescription="Movie image"
+                    android:contentDescription="@string/movie_background_image"
                     app:layout_constraintBottom_toTopOf="@id/moviesLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
                                 android:id="@+id/movieTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="The Dark Knight"
+                                android:text="@string/movie_title"
                                 android:textColor="@color/white"
                                 android:textSize="36sp"
                                 app:layout_constraintLeft_toLeftOf="parent"
@@ -86,9 +86,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
-                                android:text="69"
+                                android:text="@string/movie_rating"
                                 android:textColor="@color/white"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                                 app:layout_constraintStart_toEndOf="@+id/ratingBar"
                                 app:layout_constraintTop_toTopOf="@id/ratingBar" />
@@ -98,31 +98,44 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
-                                android:text="% Liked this movie!    -"
+                                android:text="@string/movie_liked_percentage"
                                 android:textColor="@color/white"
                                 app:layout_constraintBottom_toBottomOf="@+id/ratingText"
                                 app:layout_constraintStart_toEndOf="@+id/ratingText"
                                 app:layout_constraintTop_toTopOf="@id/ratingText" />
 
+                            <TextView
+                                android:id="@+id/ratingTextDash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="12sp"
+                                android:text="-"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toBottomOf="@+id/ratingTextLong"
+                                app:layout_constraintStart_toEndOf="@+id/ratingTextLong"
+                                app:layout_constraintTop_toTopOf="@id/ratingTextLong" />
+
                             <ImageView
                                 android:id="@+id/votesIcon"
                                 android:layout_width="18dp"
                                 android:layout_height="18dp"
-                                android:layout_marginLeft="8dp"
+                                android:layout_marginStart="8dp"
                                 app:tint="@color/main"
-                                app:layout_constraintBottom_toBottomOf="@+id/ratingTextLong"
-                                app:layout_constraintStart_toEndOf="@+id/ratingTextLong"
-                                app:layout_constraintTop_toTopOf="@id/ratingTextLong"
-                                app:srcCompat="@drawable/icon_heart" />
+                                app:layout_constraintBottom_toBottomOf="@+id/ratingTextDash"
+                                app:layout_constraintStart_toEndOf="@+id/ratingTextDash"
+                                app:layout_constraintTop_toTopOf="@id/ratingTextDash"
+                                app:srcCompat="@drawable/icon_heart"
+                                android:contentDescription="@string/heart_icon" />
 
                             <TextView
                                 android:id="@+id/votesNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
-                                android:text="69"
+                                android:text="@string/movie_rating"
                                 android:textColor="@color/white"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 app:layout_constraintBottom_toBottomOf="@+id/votesIcon"
                                 app:layout_constraintStart_toEndOf="@+id/votesIcon"
                                 app:layout_constraintTop_toTopOf="@id/votesIcon" />
@@ -132,9 +145,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
-                                android:text="Votes"
+                                android:text="@string/movie_votes"
                                 android:textColor="@color/white"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="4dp"
                                 app:layout_constraintBottom_toBottomOf="@+id/votesNumber"
                                 app:layout_constraintStart_toEndOf="@+id/votesNumber"
                                 app:layout_constraintTop_toTopOf="@id/votesNumber" />
@@ -148,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:alpha=".7"
-                            android:text="When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
+                            android:text="@string/movie_description"
                             android:textColor="@color/white"/>
 
                         <TextView
@@ -156,12 +169,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:paddingLeft="4dp"
+                            android:paddingStart="4dp"
                             android:textSize="18sp"
                             android:layout_marginTop="12dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/movieDescription"
-                            android:text="Videos" />
+                            android:text="@string/videos" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/videosComponent"
@@ -181,11 +194,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:paddingLeft="4dp"
+                            android:paddingStart="4dp"
                             android:textSize="18sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/videosComponent"
-                            android:text="Cast" />
+                            android:text="@string/cast" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/castComponent"

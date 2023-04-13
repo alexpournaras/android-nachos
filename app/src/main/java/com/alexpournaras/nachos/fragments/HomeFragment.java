@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         fetchNowPlayingMovies();
 
         sliderComponent = view.findViewById(R.id.sliderComponent);
-        
+
         sliderAdapter = new SliderAdapter(getActivity(), sliderMovies);
         sliderAdapter.setMovieItemClickListener(new SliderAdapter.MovieItemClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
 
     private void fetchPopularMovies() {
         ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", 1, "GR", "max-age=300");
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, 1, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
 
     private void fetchNowPlayingMovies() {
         ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.API_KEY, "en", 1, "GR", "max-age=300");
+        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, 1, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar("Home", false, false, false);
+            mainActivity.updateToolbar(getString(R.string.home), false, false, false);
             mainActivity.checkInternetConnection();
         }
     }
@@ -148,5 +148,5 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle);
     }
-    
+
 }

@@ -14,7 +14,7 @@
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:visibility="invisible"
-        android:text="You haven't add any movie as favourite yet!" />
+        android:text="@string/no_favorite_movies" />
 
     <TextView
         android:id="@+id/addFavoriteMovies"
@@ -24,7 +24,7 @@
         android:textColor="@color/white"
         android:layout_marginTop="40dp"
         android:visibility="invisible"
-        android:text="Press the ⭐ button to add a movie here." />
+        android:text="@string/add_favorite_movies" />
 
     <ImageView
         android:id="@+id/watchingTogetherImage"
@@ -32,7 +32,8 @@
         android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:visibility="invisible"
-        android:src="@drawable/watching_together" />
+        android:src="@drawable/watching_together"
+        android:contentDescription="@string/image_watching_together" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesComponent"

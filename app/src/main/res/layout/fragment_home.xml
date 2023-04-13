@@ -26,10 +26,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="0dp"
                 tools:itemCount="5"
-                android:contentDescription="@string/hello_first_fragment"
+                android:contentDescription="@string/popular_movies_slider"
                 tools:listitem="@layout/item_slider_movie"
                 android:clipToPadding="false"
-                android:paddingRight="16dp">
+                android:paddingEnd="16dp">
             </androidx.viewpager.widget.ViewPager>
 
 
@@ -38,11 +38,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sliderComponent"
-                android:text="In Theaters" />
+                android:text="@string/in_theaters" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/moviesComponent"
@@ -65,7 +65,8 @@
                 android:src="@drawable/logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/moviesComponent" />
+                app:layout_constraintTop_toBottomOf="@+id/moviesComponent"
+                android:contentDescription="@string/movie_nachos_logo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

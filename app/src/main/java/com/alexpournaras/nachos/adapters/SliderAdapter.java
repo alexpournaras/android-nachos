@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.viewpager.widget.PagerAdapter;
 import java.util.List;
 
+import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 import com.bumptech.glide.Glide;
@@ -54,7 +55,7 @@ public class SliderAdapter extends PagerAdapter {
             Movie movie = sliderMovies.get(position % sliderMovies.size());
 
             Glide.with(context)
-                .load("https://image.tmdb.org/t/p/original" + movie.getPosterImageUrl())
+                .load(BuildConfig.TMDB_OIMAGE_URL + movie.getPosterImageUrl())
                 .placeholder(R.drawable.placeholder_horizontal)
                 .error(R.drawable.placeholder_horizontal)
                 .into(sliderImage);

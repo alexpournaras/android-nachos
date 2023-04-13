@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            tools:src="@drawable/placeholder_vertical" />
+            tools:src="@drawable/placeholder_vertical"
+            android:contentDescription="@string/movie_poster_image" />
 
         <TextView
             android:id="@+id/movieTitle"
@@ -31,7 +32,7 @@
             android:textColor="@color/white"
             android:maxLines="1"
             android:ellipsize="end"
-            tools:text="Movie Title" />
+            android:text="@string/movie_title" />
 
     </LinearLayout>
 

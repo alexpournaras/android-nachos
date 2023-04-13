@@ -65,5 +65,4 @@ public class Movie implements Serializable {
         return backgroundImageUrl;
     }
 
-
 }

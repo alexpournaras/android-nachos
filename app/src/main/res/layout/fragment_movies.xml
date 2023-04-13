@@ -16,8 +16,7 @@
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:visibility="invisible"
-        android:elevation="1dp"
-        android:text="We didn't find any movies that match your search query. 😕" />
+        android:text="@string/no_movies_found" />
 
     <ImageView
         android:id="@+id/watchingMovieImage"
@@ -25,7 +24,8 @@
         android:layout_height="350dp"
         android:layout_marginTop="100dp"
         android:visibility="invisible"
-        android:src="@drawable/watching_movie" />
+        android:src="@drawable/watching_movie"
+        android:contentDescription="@string/image_watching_movie" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesComponent"

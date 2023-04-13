@@ -1,5 +1,6 @@
 package com.alexpournaras.nachos.adapters;
 
+import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 
@@ -13,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
-import java.util.Random;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -39,7 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         Movie movie = movies.get(position);
         holder.movieTitle.setText(movie.getTitle());
 
-        String posterImageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterImageUrl();
+        String posterImageUrl = BuildConfig.TMDB_IMAGE_URL + movie.getPosterImageUrl();
         Glide.with(context)
             .load(posterImageUrl)
             .placeholder(R.drawable.placeholder_vertical)

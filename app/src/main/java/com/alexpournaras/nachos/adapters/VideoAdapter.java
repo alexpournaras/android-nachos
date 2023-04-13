@@ -1,5 +1,6 @@
 package com.alexpournaras.nachos.adapters;
 
+import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.models.Movie;
 import com.alexpournaras.nachos.R;
 
@@ -44,7 +45,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         Video video = videos.get(position);
         holder.videoTitle.setText(video.getTitle());
 
-        String videoThumbnailUrl = "https://img.youtube.com/vi/" + video.getYoutubeId() + "/hqdefault.jpg";
+        String videoThumbnailUrl = BuildConfig.YOUTUBE_VIDEO_THUMBNAIL + video.getYoutubeId() + BuildConfig.YOUTUBE_IMAGE_THUMBNAIL;
         Glide.with(context)
             .load(videoThumbnailUrl)
             .placeholder(R.drawable.placeholder_horizontal)
@@ -53,7 +54,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         holder.videoPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String youtubeUrl = "https://www.youtube.com/watch?v=" + video.getYoutubeId();
+                String youtubeUrl = BuildConfig.YOUTUBE_VIDEO_URL + video.getYoutubeId();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
                 context.startActivity(browserIntent);
             }

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexpournaras.nachos.BuildConfig;
 import com.alexpournaras.nachos.R;
 import com.alexpournaras.nachos.models.Cast;
 import com.bumptech.glide.Glide;
@@ -39,7 +40,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
         Cast castMember = cast.get(position);
         holder.castName.setText(castMember.getName());
 
-        String imageUrl = "https://image.tmdb.org/t/p/w500/" + castMember.getImageUrl();
+        String imageUrl = BuildConfig.TMDB_IMAGE_URL + castMember.getImageUrl();
         Glide.with(context)
             .load(imageUrl)
             .placeholder(R.drawable.placeholder_vertical)

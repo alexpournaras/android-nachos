@@ -12,7 +12,7 @@
         android:id="@+id/castImage"
         android:layout_width="85dp"
         android:layout_height="105dp"
-        android:contentDescription="takis"
+        android:contentDescription="@string/cast_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/placeholder_vertical"/>
@@ -24,7 +24,7 @@
         android:ellipsize="end"
         android:lines="2"
         android:paddingTop="5dp"
-        android:text="Takis Gonias"
+        android:text="@string/cast_name"
         android:textSize="12sp"
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="@id/castImage"

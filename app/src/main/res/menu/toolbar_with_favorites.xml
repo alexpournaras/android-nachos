@@ -6,6 +6,6 @@
         android:id="@+id/favorites"
         android:iconTint="@color/white"
         android:icon="@drawable/icon_star_outline"
-        android:title="Favorites"
+        android:title="@string/favorites"
         app:showAsAction="always" />
 </menu>

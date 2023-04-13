@@ -12,7 +12,17 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        buildConfigField("String", "API_KEY", API_KEY)
+        buildConfigField("String", "TMDB_API_KEY", TMDB_API_KEY)
+        buildConfigField("String", "TMDB_API_URL", TMDB_API_URL)
+        buildConfigField("String", "TMDB_IMAGE_URL", TMDB_IMAGE_URL)
+        buildConfigField("String", "TMDB_OIMAGE_URL", TMDB_OIMAGE_URL)
+        buildConfigField("String", "YOUTUBE_VIDEO_URL", YOUTUBE_VIDEO_URL)
+        buildConfigField("String", "YOUTUBE_VIDEO_THUMBNAIL", YOUTUBE_VIDEO_THUMBNAIL)
+        buildConfigField("String", "YOUTUBE_IMAGE_THUMBNAIL", YOUTUBE_IMAGE_THUMBNAIL)
+        buildConfigField("String", "LANGUAGE", LANGUAGE)
+        buildConfigField("String", "REGION", REGION)
+        buildConfigField("int", "CACHE_SIZE", CACHE_SIZE)
+        buildConfigField("int", "CACHE_DURATION", CACHE_DURATION)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

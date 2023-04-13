@@ -66,7 +66,7 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         int page = popularMovies.size() / 20 + 1;
 
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.API_KEY, "en", page, "GR", "max-age=300");
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, page, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -92,7 +92,7 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
 
     private void fetchSearchedMovies() {
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.searchMovies(BuildConfig.API_KEY, "en", searchInputQuery, 1, "max-age=300");
+        Call<ApiMovieResponse> apiRequest = apiService.searchMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, searchInputQuery, 1, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -154,7 +154,7 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
         super.onResume();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            mainActivity.updateToolbar("Movies", false, false, true);
+            mainActivity.updateToolbar(getString(R.string.movies), false, false, true);
             mainActivity.checkInternetConnection();
         }
     }
