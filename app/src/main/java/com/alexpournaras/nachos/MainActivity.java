@@ -3,15 +3,19 @@ package com.alexpournaras.nachos;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +44,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private MovieDatabase movieDatabase;
@@ -53,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String languageCode = getAppLanguage();
+        setAppLanguage(languageCode);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -172,9 +180,9 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             });
-        } else {
-            getMenuInflater().inflate(R.menu.toolbar, menu);
         }
+
+        getMenuInflater().inflate(R.menu.toolbar_with_language, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -192,6 +200,9 @@ public class MainActivity extends AppCompatActivity {
                 ((MovieDetailsFragment) currentFragment).toggleFavoriteMovie();
             }
 
+            return true;
+        } else if (item.getItemId() == R.id.language_settings) {
+            showLanguageSettingsDialog();
             return true;
         }
 
@@ -251,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
         if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             LayoutInflater inflater = getLayoutInflater();
-            View view = inflater.inflate(R.layout.modal_no_internet, null);
+            View view = inflater.inflate(R.layout.dialog_no_internet, null);
             builder.setView(view);
 
             AlertDialog dialog = builder.create();
@@ -269,4 +280,54 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showLanguageSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_language_settings, null);
+        builder.setView(view);
+
+        RadioGroup languageSelector = view.findViewById(R.id.language_radio_group);
+        if (getAppLanguage().equals("el")) {
+            languageSelector.check(R.id.lang_el);
+        } else if (getAppLanguage().equals("sr")) {
+            languageSelector.check(R.id.lang_sr);
+        } else {
+            languageSelector.check(R.id.lang_en);
+        }
+
+        languageSelector.setOnCheckedChangeListener((group, selected_id) -> {
+            String selectedLanguage = "en"; // Default
+            if (selected_id == R.id.lang_el) {
+                selectedLanguage = "el";
+            } else if (selected_id == R.id.lang_sr) {
+                selectedLanguage = "sr";
+            }
+
+            setAppLanguage(selectedLanguage);
+            recreate(); // Recreate the activity to apply the new language
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void setAppLanguage(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("locale", languageCode);
+        editor.apply();
+    }
+
+    private String getAppLanguage() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPreferences.getString("locale", "en");
+    }
 }

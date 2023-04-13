@@ -10,12 +10,15 @@ import com.alexpournaras.nachos.services.ApiClient;
 import com.alexpournaras.nachos.services.ApiClient.ApiService;
 import com.alexpournaras.nachos.services.ApiMovieResponse;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +68,10 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     }
 
     private void fetchPopularMovies() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, 1, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.TMDB_API_KEY, sharedPreferences.getString("locale", "en"), 1, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -96,8 +101,10 @@ public class HomeFragment extends Fragment implements MovieAdapter.MovieItemClic
     }
 
     private void fetchNowPlayingMovies() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, 1, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
+        Call<ApiMovieResponse> apiRequest = apiService.getNowPlayingMovies(BuildConfig.TMDB_API_KEY, sharedPreferences.getString("locale", "en"), 1, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 

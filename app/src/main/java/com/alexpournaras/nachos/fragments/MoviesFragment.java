@@ -8,8 +8,10 @@ import com.alexpournaras.nachos.R;
 import com.alexpournaras.nachos.services.ApiClient;
 import com.alexpournaras.nachos.services.ApiMovieResponse;
 
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,9 +66,10 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
 
     private void fetchPopularMovies() {
         int page = popularMovies.size() / 20 + 1;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, page, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
+        Call<ApiMovieResponse> apiRequest = apiService.getPopularMovies(BuildConfig.TMDB_API_KEY, sharedPreferences.getString("locale", "en"), page, BuildConfig.REGION, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 
@@ -91,8 +94,10 @@ public class MoviesFragment extends Fragment implements MovieAdapter.MovieItemCl
     }
 
     private void fetchSearchedMovies() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiMovieResponse> apiRequest = apiService.searchMovies(BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, searchInputQuery, 1, "max-age=" + BuildConfig.CACHE_DURATION);
+        Call<ApiMovieResponse> apiRequest = apiService.searchMovies(BuildConfig.TMDB_API_KEY, sharedPreferences.getString("locale", "en"), searchInputQuery, 1, "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiMovieResponse>() {
 

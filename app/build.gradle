@@ -19,7 +19,6 @@ android {
         buildConfigField("String", "YOUTUBE_VIDEO_URL", YOUTUBE_VIDEO_URL)
         buildConfigField("String", "YOUTUBE_VIDEO_THUMBNAIL", YOUTUBE_VIDEO_THUMBNAIL)
         buildConfigField("String", "YOUTUBE_IMAGE_THUMBNAIL", YOUTUBE_IMAGE_THUMBNAIL)
-        buildConfigField("String", "LANGUAGE", LANGUAGE)
         buildConfigField("String", "REGION", REGION)
         buildConfigField("int", "CACHE_SIZE", CACHE_SIZE)
         buildConfigField("int", "CACHE_DURATION", CACHE_DURATION)

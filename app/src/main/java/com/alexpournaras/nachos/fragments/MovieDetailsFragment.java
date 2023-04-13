@@ -14,7 +14,9 @@ import com.alexpournaras.nachos.services.ApiClient;
 import com.alexpournaras.nachos.services.ApiVideoResponse;
 import com.bumptech.glide.Glide;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
@@ -118,8 +120,10 @@ public class MovieDetailsFragment extends Fragment {
     }
 
     private void fetchMovieVideos() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, "max-age=" + BuildConfig.CACHE_DURATION);
+        Call<ApiVideoResponse> apiRequest = apiService.getMovieVideos(movie.getId(), BuildConfig.TMDB_API_KEY, sharedPreferences.getString("locale", "en"), "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiVideoResponse>() {
 
@@ -154,8 +158,10 @@ public class MovieDetailsFragment extends Fragment {
     }
 
     private void fetchMovieCast() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         ApiClient.ApiService apiService = ApiClient.getClient(getContext()).create(ApiClient.ApiService.class);
-        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.TMDB_API_KEY, BuildConfig.LANGUAGE, "max-age=" + BuildConfig.CACHE_DURATION);
+        Call<ApiCastResponse> apiRequest = apiService.getMovieCast(movie.getId(), BuildConfig.TMDB_API_KEY, sharedPreferences.getString("locale", "en"), "max-age=" + BuildConfig.CACHE_DURATION);
 
         apiRequest.enqueue(new Callback<ApiCastResponse>() {
 

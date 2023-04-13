@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Νάτσος</string>
+    <string name="home">Αρχική</string>
+    <string name="movies">Ταινίες</string>
+    <string name="favorites">Αγαπημένα</string>
+    <string name="no_favorite_movies">Δεν έχεις προσθέσει κάποια αγαπημένη ταινία ακόμα!</string>
+    <string name="add_favorite_movies">Πάτα το ⭐ κουμπί για να προσθέσεις μια ταινία εδώ.</string>
+    <string name="in_theaters">Παίζονται τώρα</string>
+    <string name="movie_votes">Βαθμολογίες</string>
+    <string name="videos">Βίντεο</string>
+    <string name="cast">Ηθοποιοί</string>
+    <string name="no_movies_found">Δεν βρήκαμε κάποια ταινία με αυτήν την αναζήτηση. 😕</string>
+    <string name="no_internet_connection">Ουπς! Δεν είσαι συνδεδεμένος στο διαδίκτυο 😕</string>
+    <string name="not_connected_try_again">Συνδέσου και δοκίμασε ξανά</string>
+    <string name="reload">Σύνδεση</string>
+    <string name="search_hint">Αναζήτηση...</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="removed_from_favorites">αφαιρέθηκε από τα αγαπημένα!</string>
+    <string name="added_to_favorites">προστέθηκε στα αγαπημένα!</string>
+    <string name="select_language">Επιλέξτε γλώσσα</string>
+    <string name="english">🇬🇧 Αγγλικά</string>
+    <string name="greek">🇬🇷 Ελληνικά</string>
+    <string name="serbian">🇷🇸 Σέρβικα</string>
+</resources>

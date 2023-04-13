@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nachos</string>
+    <string name="home">a</string>
+    <string name="movies">a</string>
+    <string name="favorites">a</string>
+    <string name="no_favorite_movies">a</string>
+    <string name="add_favorite_movies">a</string>
+    <string name="in_theaters">a</string>
+    <string name="movie_votes">a</string>
+    <string name="videos">a</string>
+    <string name="cast">a</string>
+    <string name="no_movies_found">a</string>
+    <string name="no_internet_connection">a</string>
+    <string name="not_connected_try_again">a</string>
+    <string name="reload">a</string>
+    <string name="search_hint">a</string>
+    <string name="search">a</string>
+    <string name="removed_from_favorites">a</string>
+    <string name="added_to_favorites">a</string>
+    <string name="select_language">a</string>
+    <string name="english">a</string>
+    <string name="greek">a</string>
+    <string name="serbian">a</string>
+</resources>

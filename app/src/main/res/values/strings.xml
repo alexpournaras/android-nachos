@@ -5,33 +5,37 @@
     <string name="favorites">Favorites</string>
     <string name="no_favorite_movies">You haven\'t add any movie as favourite yet!</string>
     <string name="add_favorite_movies">Press the ⭐ button to add a movie here.</string>
-    <string name="image_watching_together">Image Watching Together</string>
-    <string name="popular_movies_slider">Popular Movies Slider</string>
+    <string name="image_watching_together" translatable="false">Image Watching Together</string>
+    <string name="popular_movies_slider" translatable="false">Popular Movies Slider</string>
     <string name="in_theaters">In Theaters</string>
-    <string name="movie_nachos_logo">Movie Nachos Logo</string>
-    <string name="movie_background_image">Movie Background Image</string>
-    <string name="movie_title">The Dark Knight</string>
-    <string name="movie_rating">69</string>
-    <string name="movie_liked_percentage">% Liked this movie!</string>
-    <string name="heart_icon">Heart Icon</string>
+    <string name="movie_nachos_logo" translatable="false">Movie Nachos Logo</string>
+    <string name="movie_background_image" translatable="false">Movie Background Image</string>
+    <string name="movie_title" translatable="false">The Dark Knight</string>
+    <string name="movie_rating" translatable="false">69</string>
+    <string name="movie_liked_percentage" translatable="false">% Liked this movie!</string>
+    <string name="heart_icon" translatable="false">Heart Icon</string>
     <string name="movie_votes">Votes</string>
-    <string name="movie_description">When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.</string>
+    <string name="movie_description" translatable="false">When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.</string>
     <string name="videos">Videos</string>
     <string name="cast">Cast</string>
     <string name="no_movies_found">We didn\'t find any movies that match your search query. 😕</string>
-    <string name="image_watching_movie">Image Watching Movie</string>
-    <string name="cast_image">Cast Image</string>
-    <string name="cast_name">Takis Gonias</string>
-    <string name="movie_poster_image">Movie Poster Image</string>
-    <string name="video_thumbnail">Video Thumbnail</string>
-    <string name="play_icon">Play Icon</string>
-    <string name="video_title">Video Title</string>
+    <string name="image_watching_movie" translatable="false">Image Watching Movie</string>
+    <string name="cast_image" translatable="false">Cast Image</string>
+    <string name="cast_name" translatable="false">Takis Gonias</string>
+    <string name="movie_poster_image" translatable="false">Movie Poster Image</string>
+    <string name="video_thumbnail" translatable="false">Video Thumbnail</string>
+    <string name="play_icon" translatable="false">Play Icon</string>
+    <string name="video_title" translatable="false">Video Title</string>
     <string name="no_internet_connection">Oops! It looks like you\'re not connected to the internet 😕</string>
     <string name="not_connected_try_again">Please check your network connection and try again.</string>
     <string name="reload">Reload</string>
-    <string name="image_no_internet">Image No Internet</string>
+    <string name="image_no_internet" translatable="false">Image No Internet</string>
     <string name="search_hint">Search...</string>
     <string name="search">Search</string>
     <string name="removed_from_favorites">removed from favorites!</string>
     <string name="added_to_favorites">added to favorites!</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">🇬🇧 English</string>
+    <string name="greek">🇬🇷 Greek</string>
+    <string name="serbian">🇷🇸 Serbian</string>
 </resources>
