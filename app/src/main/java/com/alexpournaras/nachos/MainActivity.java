@@ -304,7 +304,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             setAppLanguage(selectedLanguage);
-            recreate(); // Recreate the activity to apply the new language
+            finish();
+            startActivity(getIntent());
         });
 
         AlertDialog dialog = builder.create();
