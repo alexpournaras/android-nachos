@@ -148,6 +148,8 @@
                                 android:text="@string/movie_votes"
                                 android:textColor="@color/white"
                                 android:layout_marginStart="4dp"
+                                android:maxLines="1"
+                                android:ellipsize="end"
                                 app:layout_constraintBottom_toBottomOf="@+id/votesNumber"
                                 app:layout_constraintStart_toEndOf="@+id/votesNumber"
                                 app:layout_constraintTop_toTopOf="@id/votesNumber" />
