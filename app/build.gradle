@@ -10,8 +10,8 @@ android {
         applicationId "com.alexpournaras.nachos"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 10001
+        versionName "1.0.1"
         buildConfigField("String", "TMDB_API_KEY", TMDB_API_KEY)
         buildConfigField("String", "TMDB_API_URL", TMDB_API_URL)
         buildConfigField("String", "TMDB_IMAGE_URL", TMDB_IMAGE_URL)

@@ -134,15 +134,17 @@ public class MovieDetailsFragment extends Fragment {
                     videoAdapter = new VideoAdapter(getActivity(), videos);
                     videosComponent.setAdapter(videoAdapter);
 
-                    TextView videoTextView = getView().findViewById(R.id.videoTextView);
-                    RecyclerView videosComponent = getView().findViewById(R.id.videosComponent);
+                    if (getView() != null) {
+                        TextView videoTextView = getView().findViewById(R.id.videoTextView);
+                        RecyclerView videosComponent = getView().findViewById(R.id.videosComponent);
 
-                    if (videos.size() == 0) {
-                        videoTextView.setVisibility(View.INVISIBLE);
-                        videosComponent.setVisibility(View.INVISIBLE);
-                    } else {
-                        videoTextView.setVisibility(View.VISIBLE);
-                        videosComponent.setVisibility(View.VISIBLE);
+                        if (videos.size() == 0) {
+                            videoTextView.setVisibility(View.INVISIBLE);
+                            videosComponent.setVisibility(View.INVISIBLE);
+                        } else {
+                            videoTextView.setVisibility(View.VISIBLE);
+                            videosComponent.setVisibility(View.VISIBLE);
+                        }
                     }
                 } else {
                     // Toast.makeText(getActivity(), "Failed to fetch videos. Please try again later.", Toast.LENGTH_SHORT).show();
